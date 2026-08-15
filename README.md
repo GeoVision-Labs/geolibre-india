@@ -25,7 +25,7 @@ Geolibre India is a modern GIS platform developed using React, TypeScript, and M
 - Git & GitHub
 
 ## Architecture
-
+```
 React + TypeScript
         |
    MapLibre GL
@@ -39,7 +39,7 @@ Point  Line  Polygon
 Feature Selection
         |
 Feature Information
-
+```
 
 # Roadmap
 ## Phase 1: GIS Foundation
@@ -99,7 +99,7 @@ The current application demonstrates an interactive utility GIS workflow using a
 The application currently visualises utility points, power lines, and service areas, with capabilities for layer control, feature selection, feature highlighting, feature information, and attribute-based asset search.
 
 ## Repository structure
-
+```
 geolibra-india/
 |____src/
 |     |___components/
@@ -117,7 +117,7 @@ geolibra-india/
 |___vite.config.ts
 |___tsconfig.json
 |___README.md
-
+```
 
 ## Future Applications
 
