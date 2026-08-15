@@ -81,16 +81,22 @@ The project is currently in the GIS Web Foundation stage and is evolving toward 
 
 # Getting Started
 Clone the repository and install the required dependencies:
-git clone 
-
+```bash
+git clone https://github.com/GeoVision-Labs/geolibre-india.git
+```
+```bash
 cd geolibre-india
-
+```
+```bash
 npm install
+```
 
 ## Run the application
 
 Start the development server:
+```bash
 npm run dev
+```
 
 The application will be available at the local development URL provided by vite.
 
