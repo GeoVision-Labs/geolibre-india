@@ -2,7 +2,7 @@ import MapComponent from "./components/Map/MapComponent";
 import { useState } from "react";
 import FeatureInfo from "./components/FeatureInfo/FeatureInfo";
 import LayerControl from "./components/LayerControl/LayerControl";
-import type maplibregl from "maplibre-gl";
+import type * as maplibregl from "maplibre-gl";
 import Search from "./components/Search/Search";
 
 function App() {

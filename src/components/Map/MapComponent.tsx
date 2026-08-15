@@ -63,8 +63,6 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 
 		const properties = feature.properties;
 
-		console.log("selected Feature: ", feature);
-
 		onFeatureSelect?.({
 					assetType: properties?.assetType,
 					assetId: properties?.assetId,
@@ -222,7 +220,6 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 
 		const feature = utilityNetwork.features.find((f) => {
 			const assetId = f.properties?.assetId;
-			console.log(assetId)
 
 			return (
 				typeof assetId === "string" && assetId.toLowerCase().includes(search)
@@ -230,16 +227,12 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 		});
 
 		if (!feature) {
-			console.log("Feature not found: ", searchValue);
 			return
 		}
-
-		console.log("Search Result: ", feature);
 
 		const geometry = feature.geometry;
 
 		if(geometry.type !== "Point") {
-			console.log("Search result is not a point: ", geometry.type);
 			return;
 		}
 
