@@ -36,20 +36,20 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 			});
 		}
 		const previousSelectedId = selectedFeatureId.current;
-		if (previousSelectedId != null) {
+		if (previousSelectedId !== null) {
 			map.setFeatureState(
 				{
 					source: "utility-network",
 					id: previousSelectedId,
 				},
 				{
-					selected: true,
+					selected: false,
 				}
 			);
 		}
 
 		selectedFeatureId.current = feature.properties?.assetId;
-		if (selectedFeatureId.current != null) {
+		if (selectedFeatureId.current !== null) {
 			map.setFeatureState(
 				{
 					source: "utility-network",
