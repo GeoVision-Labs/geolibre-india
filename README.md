@@ -106,7 +106,7 @@ The application currently visualises utility points, power lines, and service ar
 
 ## Repository structure
 ```
-geolibra-india/
+geolibre-india/
 |____src/
 |     |___components/
 |     |   |___Map/
