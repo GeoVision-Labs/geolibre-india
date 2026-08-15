@@ -10,9 +10,10 @@ type MapComponentProps = {
 	onFeatureSelect: (feature: unknown) => void;
 	onMapReady?: (map: maplibregl.Map) => void;
 	searchValue?: string;
+	onClearSelection?: (clearFn: () => void) => void;
 };
 
-function MapComponent({ onFeatureSelect, onMapReady, searchValue }: MapComponentProps) {
+function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelection }: MapComponentProps) {
 
 	const selectedFeatureId = useRef<string | number>(null);
 	const mapContainer = useRef<HTMLDivElement | null>(null);
@@ -54,7 +55,6 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue }: MapComponent
 				});
 	}
 
-	
 	const clearSelection = (map: maplibregl.Map) => {
 		if (selectedFeatureId.current === null) {
 			return;
@@ -73,6 +73,15 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue }: MapComponent
 
 		onFeatureSelect?.(null);
 	}
+
+	useEffect(() => {
+		onClearSelection?.(() => {
+			const map = mapRef.current;
+			if (map) {
+				clearSelection(map);
+			}
+		});
+	}, [onClearSelection]);
 
 	useEffect(() => {
 		
@@ -141,22 +150,40 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue }: MapComponent
 			});
 
 			map.on("click", (event) => {
-				const features = map.queryRenderedFeatures(event.point, {
+				const pointFeatures = map.queryRenderedFeatures(event.point, {
 					layers: ["utility-points"],
 				});
-
-				if (features.length === 0) {
-					clearSelection(map);
-					return;
+				if (pointFeatures.length > 0) {
+					const feature = pointFeatures[0];
+					if (feature.id != null) {
+						selectFeature(map, feature);
+						return;
+					}
 				}
 
-				const feature = features[0];
-
-				if (feature.id == null) {
-					return;
+				const lineFeatures = map.queryRenderedFeatures(event.point, {
+					layers: ["power-lines"],
+				});
+				if (lineFeatures.length > 0) {
+					const feature = lineFeatures[0];
+					if (feature.id != null) {
+						selectFeature(map, feature);
+						return;
+					}
 				}
 
-				selectFeature(map, feature);
+				const polygonFeatures = map.queryRenderedFeatures(event.point, {
+					layers: ["service-areas"],
+				});
+				if (polygonFeatures.length > 0) {
+					const feature = polygonFeatures[0];
+					if (feature.id != null) {
+						selectFeature(map, feature);
+						return;
+					}
+				}
+
+				clearSelection(map);
 			});
 			
 		});
@@ -180,7 +207,7 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue }: MapComponent
 			console.log(assetId)
 
 			return (
-				typeof assetId === "string" && assetId.toLowerCase() === search
+				typeof assetId === "string" && assetId.toLowerCase().includes(search)
 			);
 		});
 
@@ -211,7 +238,7 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue }: MapComponent
 	}, [searchValue, onFeatureSelect]);
 
 	return (
-		<div style={{ position: "relative", width: "100%", height: "100vh" }} >
+		<div style={{ position: "fixed", inset: 0, width: "100%", height: "100dvh", overflow: "hidden" }} >
 			<div ref={mapContainer} style={{width: "100%", height: "100%"}} />
 		</div>
 	)
