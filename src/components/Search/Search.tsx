@@ -12,6 +12,7 @@ function Search({ onSearch }: SearchProps) {
 
         const handleSubmit = (event: React.FormEvent) => {
                 event.preventDefault();
+                if (!value.trim()) return;
                 onSearch(value.trim());
         };
 
