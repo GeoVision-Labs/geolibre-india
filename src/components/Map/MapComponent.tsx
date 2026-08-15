@@ -7,7 +7,11 @@ import utilityNetwork from '../../data/utility-network.json';
 maplibregl.setWorkerUrl(workerUrl);
 
 type MapComponentProps = {
-	onFeatureSelect: (feature: unknown) => void;
+	onFeatureSelect: (feature: {
+		assetType?: string;
+		assetId?: string;
+		status?: string;
+	} | null) => void;
 	onMapReady?: (map: maplibregl.Map) => void;
 	searchValue?: string;
 	onClearSelection?: (clearFn: () => void) => void;
@@ -31,18 +35,31 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 				selected: false
 			});
 		}
+		const previousSelectedId = selectedFeatureId.current;
+		if (previousSelectedId != null) {
+			map.setFeatureState(
+				{
+					source: "utility-network",
+					id: previousSelectedId,
+				},
+				{
+					selected: true,
+				}
+			);
+		}
 
 		selectedFeatureId.current = feature.properties?.assetId;
-
-		map.setFeatureState(
-			{
-				source: "utility-network",
-				id: selectedFeatureId.current,
-			},
-			{
-				selected: true,
-			}
-		);
+		if (selectedFeatureId.current != null) {
+			map.setFeatureState(
+				{
+					source: "utility-network",
+					id: selectedFeatureId.current,
+				},
+				{
+					selected: true,
+				}
+			);	
+		}
 
 		const properties = feature.properties;
 
@@ -58,9 +75,8 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 	const clearSelection = (map: maplibregl.Map) => {
 		if (selectedFeatureId.current === null) {
 			return;
-		}
-
-		map.setFeatureState(
+		} else {
+			map.setFeatureState(
 			{
 				source: "utility-network",
 				id: selectedFeatureId.current,
@@ -69,6 +85,8 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 				selected: false
 			}
 		);
+		}
+		
 		selectedFeatureId.current = null;
 
 		onFeatureSelect?.(null);
