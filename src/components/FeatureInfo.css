@@ -1,0 +1,38 @@
+.feature-info {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 280px;
+        padding: 16px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+        z-index: 10;
+        font-family: Arial, sans-serif;
+}
+
+.feature-info h3 {
+        margin: 0 0 16px 0;
+        font-size: 18px;
+}
+
+.feature-info p {
+        margin: 0;
+        color: #666;
+}
+
+.feature-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+}
+
+.feature-row span {
+        color: #666;
+}
+
+.feature-row strong {
+        color: #222;
+}

@@ -1,0 +1,24 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Visakhapatnam",
+                "type": "City"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [83.2185, 17.6868]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Gajuwaka",
+                "type":"Point",
+                "coordinates": [83.1815, 17.6868]
+            }
+        }
+    ]
+}

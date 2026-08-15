@@ -1,77 +1,132 @@
-# React + TypeScript + Vite
+> Geolibre India
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Open-source geospatial platform for building scalable GIS applications across India.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Geolibre India is a modern GIS platform developed using React, TypeScript, and MapLibre GL. It provides a reusable foundation for building geospatial applications across utilities, infrastructure, environment, disaster management, natural resources, and GeoAI.
 
-## React Compiler
+## Current Features
+- Interactive web mapping
+- Point, line, and polygon visualization
+- Feature selection and highlighting
+- Feature information panel
+- Layer visibility control
+- Attribute-based search
+- GeoJSON data support
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Technology Stack
+- React
+- TypeScript
+- MapLibre GL JS
+- Vite
+- GeoJSON
+- HTML/CSS
+- Git & GitHub
 
-Note: This will impact Vite dev & build performances.
+## Architecture
 
-## Expanding the ESLint configuration
+React + TypeScript
+        |
+   MapLibre GL
+        |
+   GeoJSON Data
+        |
++-------+-------+
+|       |       |
+Point  Line  Polygon
+        |
+Feature Selection
+        |
+Feature Information
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+# Roadmap
+## Phase 1: GIS Foundation
+- Web GIS application
+- GeoJSON layers
+- Search and layer controls
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Phase 2: Advanced GIS
+- Vector Tiles & PMTiles
+- Drawing and editing tools
+- Measurement and offline mapping
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Phase 3: Backend GIS
+- FastAPI
+- PostGIS
+- GeoServer
+- OGC APIs
 
-```
+## Phase 4: Domain Solutions
+- Utility GIS
+- Urban Infrastructure
+- Disaster Management
+- Land & Asset Management
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Phase 5: GeoAI & Scalability
+- Satellite data processing
+- GeoAI and Machine Learning
+- Docker and CI/CD
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Vision
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Build a reusable open-source geospatial foundation that supports multiple GIS domains instead of creating separate applications for each use case.
 
-```
+## Status
+
+🚧 Active Development
+
+The project is currently in the GIS Web Foundation stage and is evolving toward a full-scale open geospatial platform for India.
+
+# Getting Started
+Clone the repository and install the required dependencies:
+git clone 
+
+cd geolibre-india
+
+npm install
+
+## Run the application
+
+Start the development server:
+npm run dev
+
+The application will be available at the local development URL provided by vite.
+
+## Current Use case
+The current application demonstrates an interactive utility GIS workflow using a sample utility network around Visakhapatnam, Andhrapradesh.
+The application currently visualises utility points, power lines, and service areas, with capabilities for layer control, feature selection, feature highlighting, feature information, and attribute-based asset search.
+
+## Repository structure
+
+geolibra-india/
+|____src/
+|     |___components/
+|     |   |___Map/
+|     |   |___Search/
+|     |   |___LayerControl/
+|     |   |___FeatureInfo/
+|     |
+|     |___data/
+|     |___App.tsx
+|     |___main.tsx
+|
+|___public/
+|___package.json
+|___vite.config.ts
+|___tsconfig.json
+|___README.md
+
+
+## Future Applications
+
+Planned application and capabilities include:
+- Utility netowrk and asset management
+- Natural resources management
+- Waterbody and enviroment monitoring
+- Disaster management and emergency response
+- Land and cadastral GIS
+- Satellite and Earth observation analysis
+- GeoAI-powered spatial intelligence
+

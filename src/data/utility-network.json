@@ -1,0 +1,79 @@
+{
+        "type": "FeatureCollection",
+        "features": [
+                {
+                        "type": "Feature",
+                        "id": "SS-001",
+                        "properties" : {
+                                "assetType": "SubStation",
+                                "assetId": "SS-001",
+                                "status": "Active"
+                        },
+                        "geometry": {
+                                "type": "Point",
+                                "coordinates": [83.2185, 17.6868]
+                        }
+                },
+                {
+                        "type": "Feature",
+                        "id": "P-001",
+                        "properties": {
+                                "assetType": "Pole",
+                                "assetId": "P-001",
+                                "status": "Active"
+                        },
+                        "geometry": {
+                                "type": "Point",
+                                "coordinates": [83.225, 17.690]
+                        }
+                },
+                {
+                        "type": "Feature",
+                        "id": "P-002",
+                        "properties": {
+                                "assetType": "Pole",
+                                "assetId": "P-002",
+                                "status": "Maintenance"
+                        },
+                        "geometry": {
+                                "type": "Point",
+                                "coordinates": [83.232, 17.694]
+                        }
+                },
+                {
+                        "type": "Feature",
+                        "id": "PL-001",
+                        "properties": {
+                                "assetType": "Power Line",
+                                "assetId": "PL-001",
+                                "voltage": "33KV"
+                        },
+                        "geometry": {
+                                "type": "LineString",
+                                "coordinates": [
+                                        [83.2185, 17.6868],
+                                        [83.225, 17.690],
+                                        [83.232, 17.694]
+                                ]
+                        }
+                },
+                {
+                        "type": "Feature",
+                        "id": "SA-001",
+                        "properties": {
+                                "assetType": "Service Area",
+                                "assetId": "SA-001"
+                        },
+                        "geometry": {
+                                "type": "Polygon",
+                                "coordinates": [[
+                                        [83.210, 17.680],
+                                        [83.240, 17.680],
+                                        [83.240, 17.705],
+                                        [83.210, 17.705],
+                                        [83.210, 17.680]
+                                ]]
+                        }
+                }
+        ]
+}
