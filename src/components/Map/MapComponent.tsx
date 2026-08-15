@@ -7,12 +7,17 @@ import utilityNetwork from '../../data/utility-network.json';
 maplibregl.setWorkerUrl(workerUrl);
 
 type MapComponentProps = {
-	onFeatureSelect: (feature: unknown) => void;
+	onFeatureSelect: (feature: {
+		assetType?: string;
+		assetId?: string;
+		status?: string;
+	} | null) => void;
 	onMapReady?: (map: maplibregl.Map) => void;
 	searchValue?: string;
+	onClearSelection?: (clearFn: () => void) => void;
 };
 
-function MapComponent({ onFeatureSelect, onMapReady, searchValue }: MapComponentProps) {
+function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelection }: MapComponentProps) {
 
 	const selectedFeatureId = useRef<string | number>(null);
 	const mapContainer = useRef<HTMLDivElement | null>(null);
@@ -30,22 +35,33 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue }: MapComponent
 				selected: false
 			});
 		}
+		const previousSelectedId = selectedFeatureId.current;
+		if (previousSelectedId != null) {
+			map.setFeatureState(
+				{
+					source: "utility-network",
+					id: previousSelectedId,
+				},
+				{
+					selected: true,
+				}
+			);
+		}
 
 		selectedFeatureId.current = feature.properties?.assetId;
-
-		map.setFeatureState(
-			{
-				source: "utility-network",
-				id: selectedFeatureId.current,
-			},
-			{
-				selected: true,
-			}
-		);
+		if (selectedFeatureId.current != null) {
+			map.setFeatureState(
+				{
+					source: "utility-network",
+					id: selectedFeatureId.current,
+				},
+				{
+					selected: true,
+				}
+			);	
+		}
 
 		const properties = feature.properties;
-
-		console.log("selected Feature: ", feature);
 
 		onFeatureSelect?.({
 					assetType: properties?.assetType,
@@ -54,13 +70,11 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue }: MapComponent
 				});
 	}
 
-	
 	const clearSelection = (map: maplibregl.Map) => {
 		if (selectedFeatureId.current === null) {
 			return;
-		}
-
-		map.setFeatureState(
+		} else {
+			map.setFeatureState(
 			{
 				source: "utility-network",
 				id: selectedFeatureId.current,
@@ -69,10 +83,21 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue }: MapComponent
 				selected: false
 			}
 		);
+		}
+		
 		selectedFeatureId.current = null;
 
 		onFeatureSelect?.(null);
 	}
+
+	useEffect(() => {
+		onClearSelection?.(() => {
+			const map = mapRef.current;
+			if (map) {
+				clearSelection(map);
+			}
+		});
+	}, [onClearSelection]);
 
 	useEffect(() => {
 		
@@ -141,22 +166,40 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue }: MapComponent
 			});
 
 			map.on("click", (event) => {
-				const features = map.queryRenderedFeatures(event.point, {
+				const pointFeatures = map.queryRenderedFeatures(event.point, {
 					layers: ["utility-points"],
 				});
-
-				if (features.length === 0) {
-					clearSelection(map);
-					return;
+				if (pointFeatures.length > 0) {
+					const feature = pointFeatures[0];
+					if (feature.id != null) {
+						selectFeature(map, feature);
+						return;
+					}
 				}
 
-				const feature = features[0];
-
-				if (feature.id == null) {
-					return;
+				const lineFeatures = map.queryRenderedFeatures(event.point, {
+					layers: ["power-lines"],
+				});
+				if (lineFeatures.length > 0) {
+					const feature = lineFeatures[0];
+					if (feature.id != null) {
+						selectFeature(map, feature);
+						return;
+					}
 				}
 
-				selectFeature(map, feature);
+				const polygonFeatures = map.queryRenderedFeatures(event.point, {
+					layers: ["service-areas"],
+				});
+				if (polygonFeatures.length > 0) {
+					const feature = polygonFeatures[0];
+					if (feature.id != null) {
+						selectFeature(map, feature);
+						return;
+					}
+				}
+
+				clearSelection(map);
 			});
 			
 		});
@@ -177,24 +220,19 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue }: MapComponent
 
 		const feature = utilityNetwork.features.find((f) => {
 			const assetId = f.properties?.assetId;
-			console.log(assetId)
 
 			return (
-				typeof assetId === "string" && assetId.toLowerCase() === search
+				typeof assetId === "string" && assetId.toLowerCase().includes(search)
 			);
 		});
 
 		if (!feature) {
-			console.log("Feature not found: ", searchValue);
 			return
 		}
-
-		console.log("Search Result: ", feature);
 
 		const geometry = feature.geometry;
 
 		if(geometry.type !== "Point") {
-			console.log("Search result is not a point: ", geometry.type);
 			return;
 		}
 
@@ -211,7 +249,7 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue }: MapComponent
 	}, [searchValue, onFeatureSelect]);
 
 	return (
-		<div style={{ position: "relative", width: "100%", height: "100vh" }} >
+		<div style={{ position: "fixed", inset: 0, width: "100%", height: "100dvh", overflow: "hidden" }} >
 			<div ref={mapContainer} style={{width: "100%", height: "100%"}} />
 		</div>
 	)
