@@ -3,6 +3,8 @@ import * as maplibregl from 'maplibre-gl';
 import "maplibre-gl/dist/maplibre-gl.css";
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import utilityNetwork from '../../data/utility-network.json';
+import { bbox } from "@turf/bbox";
+import home from "/home.png";
 
 maplibregl.setWorkerUrl(workerUrl);
 
@@ -17,8 +19,56 @@ type MapComponentProps = {
 	onClearSelection?: (clearFn: () => void) => void;
 };
 
+class HomeControl implements
+maplibregl.IControl {
+	private map?: maplibregl.Map; 
+	onAdd(map: maplibregl.Map) {
+		this.map = map;
+		const container = document.createElement("div");
+		container.className = "maplibregl-ctrl maplibregl-ctrl-group";
+
+		const icon = document.createElement("img");
+		icon.src = home;
+		icon.alt = "Icon";
+		icon.style.width = "30px";
+
+		const button = document.createElement("button");
+		button.type = "button";
+		button.title = "Zoom to full extent";
+		button.setAttribute("aria-label", "Zoom to full extent");
+		button.appendChild(icon);
+
+		button.onclick = () => {
+			if(!this.map) return;
+			const bounds = bbox(utilityNetwork as any) as [
+				number,
+				number,
+				number,
+				number
+			];
+			this.map.fitBounds(
+				[
+					[bounds[0], bounds[1]],
+					[bounds[2], bounds[3]],
+				],
+				{
+					padding: 60,
+					duration: 800,
+				}
+			);
+		};
+		container.appendChild(button);
+		return container;
+	}
+
+	onRemove() {
+		this.map = undefined;
+	}
+}
+
 function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelection }: MapComponentProps) {
 
+	const utilityNetworkGeoJSON = utilityNetwork as unknown as GeoJSON.FeatureCollection;
 	const selectedFeatureId = useRef<string | number>(null);
 	const mapContainer = useRef<HTMLDivElement | null>(null);
 	const mapRef = useRef<maplibregl.Map | null>(null);
@@ -130,12 +180,13 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 			maxWidth: 100,
 			unit: "metric",
 		}));
+		map.addControl(new HomeControl(), "top-right");
 
 		const addUtilityLayers = () => {
 			if(!map.getSource("utility-network")) {
 				map.addSource("utility-network", {
 					type: "geojson",
-					data: utilityNetwork,
+					data: utilityNetworkGeoJSON,
 					promoteId: "assetId",
 				});
 			}
