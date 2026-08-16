@@ -4,9 +4,10 @@ import '../FeatureInfo.css';
 type FeatureInforPorps = {
         feature: IdentifyResult | null;
         onClose?: () => void;
+        onZoomToFeature?: () => void;
 };
 
-function FeatureInfo({feature, onClose}: FeatureInforPorps) {
+function FeatureInfo({feature, onClose, onZoomToFeature}: FeatureInforPorps) {
         if(!feature) {
                 return(
                         <div className="feature-info">
@@ -51,6 +52,11 @@ function FeatureInfo({feature, onClose}: FeatureInforPorps) {
                                                 <strong>{feature.layerId}</strong>
                                         </div>
                                 </div>
+                        )}
+                        {feature && (
+                                <button className='feature-into-action' onClick={onZoomToFeature} aria-label='Zoom to feature'>
+                                        Zoom to Feature
+                                </button>
                         )}
                         <div className='feature-attributes'>
                                 {attributes.map(([key, value]) => (

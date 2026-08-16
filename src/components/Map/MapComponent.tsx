@@ -15,6 +15,7 @@ type MapComponentProps = {
 	onMapReady?: (map: maplibregl.Map) => void;
 	searchValue?: string;
 	onClearSelection?: (clearFn: () => void) => void;
+	onZoomToFeature?: (zoomFn: () => void) => void;
 };
 
 class HomeControl implements
@@ -64,7 +65,7 @@ maplibregl.IControl {
 	}
 }
 
-function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelection }: MapComponentProps) {
+function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelection, onZoomToFeature }: MapComponentProps) {
 
 	const utilityNetworkGeoJSON = utilityNetwork as unknown as GeoJSON.FeatureCollection;
 	const selectedFeatureId = useRef<string | number>(null);
@@ -123,6 +124,45 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 
 		onFeatureSelect?.(identifyResult);
 	}
+	
+	const zoomToSelectedFeature = () => {
+		const map = mapRef.current;
+
+		if (!map || selectedFeatureId.current === null) {return;}
+		const feature = utilityNetwork.features.find(
+			(item) => item.properties?.assetId === selectedFeatureId.current
+		);
+		if (!feature) {return;}
+
+		const geometry = feature.geometry;
+		if (geometry.type === "Point") {
+			const coordinates = geometry.coordinates as [number, number];
+			map.flyTo({
+				center: coordinates,
+				zoom: 16,
+				duration: 800,
+			});
+			return;
+		}
+
+		const bounds = bbox(feature as any) as [
+			number,
+			number,
+			number,
+			number,
+		];
+		map.fitBounds(
+			[
+				[bounds[0], bounds[1]],
+				[bounds[2], bounds[3]],
+			],
+			{
+				padding: 100,
+				duration: 800,
+				maxZoom:17,
+			}
+		);
+	};
 
 	const clearSelection = (map: maplibregl.Map) => {
 		if (selectedFeatureId.current === null) {
@@ -347,6 +387,10 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 		selectFeature(map, feature);
 
 	}, [searchValue, onFeatureSelect]);
+	
+	useEffect(() => {
+		onZoomToFeature?.(zoomToSelectedFeature);
+	}, [onZoomToFeature]);
 
 	return (
 		<div style={{ position: "fixed", inset: 0, width: "100%", height: "100dvh", overflow: "hidden" }} >

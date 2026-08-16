@@ -13,6 +13,7 @@ function App() {
         const [map, setMap] = useState<maplibregl.Map | null>(null);
         const [searchValue, setSearchValue] = useState("");
         const [clearMapSelection, setClearMapSelection] = useState<(() => void) | null>(null);
+        const [zoomToFeature, setZoomToFeature] = useState<(() => void) | null>(null);
 
         const handleSearch = (value: string) => {
                 console.log("Searching for: ", value);
@@ -21,13 +22,21 @@ function App() {
 
         return (
                 <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
-                        <MapComponent onFeatureSelect={setSelectedFeature} onMapReady={setMap} searchValue={searchValue} onClearSelection={(clearFn) => setClearMapSelection(() => clearFn)} />
+                        <MapComponent 
+                        onFeatureSelect={setSelectedFeature} 
+                        onMapReady={setMap} 
+                        searchValue={searchValue} 
+                        onClearSelection={(clearFn) => setClearMapSelection(() => clearFn)}
+                        onZoomToFeature={(zoomFn) => setZoomToFeature(() => zoomFn)}
+                 />
                         {selectedFeature && (<FeatureInfo feature={selectedFeature} onClose={
                                 () => {
                                         clearMapSelection?.();
                                         setSelectedFeature(null);
                                 }
-                        } />)}
+                        } onZoomToFeature={() => {
+                                zoomToFeature?.();
+                        }} />)}
                         <LayerControl map={map} />
                         <Search onSearch={handleSearch} />
                         <BasemapControl map={map} />
