@@ -5,9 +5,10 @@ import LayerControl from "./components/LayerControl/LayerControl";
 import type * as maplibregl from "maplibre-gl";
 import Search from "./components/Search/Search";
 import BasemapControl from "./components/BasemapControl/BasemapControl";
+import type { IdentifyResult } from "./types/IdentifyResult";
 
 function App() {
-        const [selectedFeature, setSelectedFeature] = useState<Record<string, unknown> | null>(null);
+        const [selectedFeature, setSelectedFeature] = useState<IdentifyResult | null>(null);
 
         const [map, setMap] = useState<maplibregl.Map | null>(null);
         const [searchValue, setSearchValue] = useState("");

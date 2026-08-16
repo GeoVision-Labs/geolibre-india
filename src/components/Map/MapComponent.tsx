@@ -6,11 +6,12 @@ import utilityNetwork from '../../data/utility-network.json';
 import { bbox } from "@turf/bbox";
 import home from "/home.png";
 import LocateControl from "./LocateControl";
+import type { IdentifyResult } from "../../types/IdentifyResult";
 
 maplibregl.setWorkerUrl(workerUrl);
 
 type MapComponentProps = {
-	onFeatureSelect: (feature: Record<string, unknown> | null) => void;
+	onFeatureSelect: (feature: IdentifyResult) => void;
 	onMapReady?: (map: maplibregl.Map) => void;
 	searchValue?: string;
 	onClearSelection?: (clearFn: () => void) => void;
@@ -112,9 +113,15 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 			);	
 		}
 
-		const properties = feature.properties as Record<string, unknown> | undefined;
+		const properties = feature.properties as Record<string, unknown>;
+		const identifyResult: IdentifyResult = {
+			id: feature.id,
+			geometryType: feature.geometry?.type,
+			layerId: feature.layer?.id ?? "",
+			properties,
+		};
 
-		onFeatureSelect?.(properties ?? null);
+		onFeatureSelect?.(identifyResult);
 	}
 
 	const clearSelection = (map: maplibregl.Map) => {

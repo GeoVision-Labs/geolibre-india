@@ -1,12 +1,8 @@
+import type { IdentifyResult } from '../../types/IdentifyResult';
 import '../FeatureInfo.css';
 
 type FeatureInforPorps = {
-        feature: {
-                assetType?: string;
-                assetId?: string;
-                status?: string;
-                [key: string]: unknown;
-        } | null;
+        feature: IdentifyResult | null;
         onClose?: () => void;
 };
 
@@ -28,8 +24,11 @@ function FeatureInfo({feature, onClose}: FeatureInforPorps) {
                 "source",
         ];
 
-        const attributes = Object.entries(feature).filter(([key, value]) => 
-                !exclusiveFields.includes(key) && value !== null && value !== undefined && value !== ""
+        const attributes = Object.entries(feature.properties).filter(
+                ([, value]) => 
+                        value !== null &&
+                        value !== undefined &&
+                        value !== ""
         );
 
         return (
@@ -44,7 +43,23 @@ function FeatureInfo({feature, onClose}: FeatureInforPorps) {
                                         </button>
                                 )}
                         </div>
+                        {feature && (
+                                <div className='feature-metadata'>
+                                        <div className='feature-row'>
+                                                <span>Feature ID</span>
+                                                <strong>{feature.id}</strong>
+                                        </div>
 
+                                        <div className='feature-row'>
+                                                <span>Geometry</span>
+                                                <strong>{feature.geometryType}</strong>
+                                        </div>
+                                        <div className='feature-row'>
+                                                <span>Layer</span>
+                                                <strong>{feature.layerId}</strong>
+                                        </div>
+                                </div>
+                        )}
                         <div className='feature-attributes'>
                                 {attributes.map(([key, value]) => (
                                         <div className="feature-row" key={key} >
