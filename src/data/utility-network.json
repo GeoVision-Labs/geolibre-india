@@ -1,79 +1,3383 @@
 {
-        "type": "FeatureCollection",
-        "features": [
-                {
-                        "type": "Feature",
-                        "id": "SS-001",
-                        "properties" : {
-                                "assetType": "SubStation",
-                                "assetId": "SS-001",
-                                "status": "Active"
-                        },
-                        "geometry": {
-                                "type": "Point",
-                                "coordinates": [83.2185, 17.6868]
-                        }
-                },
-                {
-                        "type": "Feature",
-                        "id": "P-001",
-                        "properties": {
-                                "assetType": "Pole",
-                                "assetId": "P-001",
-                                "status": "Active"
-                        },
-                        "geometry": {
-                                "type": "Point",
-                                "coordinates": [83.225, 17.690]
-                        }
-                },
-                {
-                        "type": "Feature",
-                        "id": "P-002",
-                        "properties": {
-                                "assetType": "Pole",
-                                "assetId": "P-002",
-                                "status": "Maintenance"
-                        },
-                        "geometry": {
-                                "type": "Point",
-                                "coordinates": [83.232, 17.694]
-                        }
-                },
-                {
-                        "type": "Feature",
-                        "id": "PL-001",
-                        "properties": {
-                                "assetType": "Power Line",
-                                "assetId": "PL-001",
-                                "voltage": "33KV"
-                        },
-                        "geometry": {
-                                "type": "LineString",
-                                "coordinates": [
-                                        [83.2185, 17.6868],
-                                        [83.225, 17.690],
-                                        [83.232, 17.694]
-                                ]
-                        }
-                },
-                {
-                        "type": "Feature",
-                        "id": "SA-001",
-                        "properties": {
-                                "assetType": "Service Area",
-                                "assetId": "SA-001"
-                        },
-                        "geometry": {
-                                "type": "Polygon",
-                                "coordinates": [[
-                                        [83.210, 17.680],
-                                        [83.240, 17.680],
-                                        [83.240, 17.705],
-                                        [83.210, 17.705],
-                                        [83.210, 17.680]
-                                ]]
-                        }
-                }
+  "type": "FeatureCollection",
+  "name": "geolibre-utility-network-prototype",
+  "description": "Synthetic but realistic utility GIS prototype dataset for GeoLibre. No real customer or operational data.",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "SS-001",
+      "properties": {
+        "assetType": "SubStation",
+        "assetId": "SS-001",
+        "status": "Active",
+        "condition": "Good",
+        "voltagePrimary": "132KV",
+        "voltageSecondary": "33KV",
+        "capacityMVA": 25,
+        "operator": "Visakhapatnam Distribution Division",
+        "commissionedYear": 2017,
+        "feederCount": 4,
+        "protectionScheme": "Digital Relay",
+        "lastInspectionDate": "2026-02-12",
+        "maintenanceCycleDays": 180,
+        "region": "Visakhapatnam",
+        "zone": "Zone-2"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2095,
+          17.6768
         ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SS-002",
+      "properties": {
+        "assetType": "SubStation",
+        "assetId": "SS-002",
+        "status": "Active",
+        "condition": "Good",
+        "voltagePrimary": "132KV",
+        "voltageSecondary": "33KV",
+        "capacityMVA": 31.5,
+        "operator": "Visakhapatnam Distribution Division",
+        "commissionedYear": 2018,
+        "feederCount": 5,
+        "protectionScheme": "Digital Relay",
+        "lastInspectionDate": "2026-03-13",
+        "maintenanceCycleDays": 180,
+        "region": "Visakhapatnam",
+        "zone": "Zone-3"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2275,
+          17.6768
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SS-003",
+      "properties": {
+        "assetType": "SubStation",
+        "assetId": "SS-003",
+        "status": "Active",
+        "condition": "Good",
+        "voltagePrimary": "132KV",
+        "voltageSecondary": "33KV",
+        "capacityMVA": 40,
+        "operator": "Visakhapatnam Distribution Division",
+        "commissionedYear": 2019,
+        "feederCount": 6,
+        "protectionScheme": "Digital Relay",
+        "lastInspectionDate": "2026-04-14",
+        "maintenanceCycleDays": 180,
+        "region": "Visakhapatnam",
+        "zone": "Zone-4"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2455,
+          17.6768
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SS-004",
+      "properties": {
+        "assetType": "SubStation",
+        "assetId": "SS-004",
+        "status": "Active",
+        "condition": "Good",
+        "voltagePrimary": "132KV",
+        "voltageSecondary": "33KV",
+        "capacityMVA": 20,
+        "operator": "Visakhapatnam Distribution Division",
+        "commissionedYear": 2020,
+        "feederCount": 3,
+        "protectionScheme": "Digital Relay",
+        "lastInspectionDate": "2026-05-15",
+        "maintenanceCycleDays": 180,
+        "region": "Visakhapatnam",
+        "zone": "Zone-1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.1915,
+          17.6968
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SS-005",
+      "properties": {
+        "assetType": "SubStation",
+        "assetId": "SS-005",
+        "status": "Active",
+        "condition": "Good",
+        "voltagePrimary": "132KV",
+        "voltageSecondary": "33KV",
+        "capacityMVA": 25,
+        "operator": "Visakhapatnam Distribution Division",
+        "commissionedYear": 2021,
+        "feederCount": 4,
+        "protectionScheme": "Digital Relay",
+        "lastInspectionDate": "2026-06-16",
+        "maintenanceCycleDays": 180,
+        "region": "Visakhapatnam",
+        "zone": "Zone-2"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2095,
+          17.6968
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SS-006",
+      "properties": {
+        "assetType": "SubStation",
+        "assetId": "SS-006",
+        "status": "Maintenance",
+        "condition": "Fair",
+        "voltagePrimary": "132KV",
+        "voltageSecondary": "33KV",
+        "capacityMVA": 31.5,
+        "operator": "Visakhapatnam Distribution Division",
+        "commissionedYear": 2022,
+        "feederCount": 5,
+        "protectionScheme": "Digital Relay",
+        "lastInspectionDate": "2026-01-17",
+        "maintenanceCycleDays": 180,
+        "region": "Visakhapatnam",
+        "zone": "Zone-3"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2275,
+          17.6968
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SS-007",
+      "properties": {
+        "assetType": "SubStation",
+        "assetId": "SS-007",
+        "status": "Active",
+        "condition": "Good",
+        "voltagePrimary": "132KV",
+        "voltageSecondary": "33KV",
+        "capacityMVA": 40,
+        "operator": "Visakhapatnam Distribution Division",
+        "commissionedYear": 2016,
+        "feederCount": 6,
+        "protectionScheme": "Digital Relay",
+        "lastInspectionDate": "2026-02-18",
+        "maintenanceCycleDays": 180,
+        "region": "Visakhapatnam",
+        "zone": "Zone-4"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2455,
+          17.6968
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SS-008",
+      "properties": {
+        "assetType": "SubStation",
+        "assetId": "SS-008",
+        "status": "Active",
+        "condition": "Good",
+        "voltagePrimary": "132KV",
+        "voltageSecondary": "33KV",
+        "capacityMVA": 20,
+        "operator": "Visakhapatnam Distribution Division",
+        "commissionedYear": 2017,
+        "feederCount": 3,
+        "protectionScheme": "Digital Relay",
+        "lastInspectionDate": "2026-03-11",
+        "maintenanceCycleDays": 180,
+        "region": "Visakhapatnam",
+        "zone": "Zone-1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.1915,
+          17.7168
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TX-001",
+      "properties": {
+        "assetType": "Distribution Transformer",
+        "assetId": "TX-001",
+        "status": "Active",
+        "condition": "Good",
+        "ratingKVA": 100,
+        "primaryVoltage": "11KV",
+        "secondaryVoltage": "415V",
+        "feederId": "FDR-12",
+        "manufacturer": "CG Power",
+        "installationYear": 2019,
+        "loadPercent": 49,
+        "oilTemperatureC": 51,
+        "lastInspectionDate": "2026-02-02",
+        "poleMounted": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.231048,
+          17.653551
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TX-002",
+      "properties": {
+        "assetType": "Distribution Transformer",
+        "assetId": "TX-002",
+        "status": "Active",
+        "condition": "Fair",
+        "ratingKVA": 160,
+        "primaryVoltage": "11KV",
+        "secondaryVoltage": "415V",
+        "feederId": "FDR-21",
+        "manufacturer": "BHEL",
+        "installationYear": 2020,
+        "loadPercent": 56,
+        "oilTemperatureC": 54,
+        "lastInspectionDate": "2026-03-03",
+        "poleMounted": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.198253,
+          17.667425
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TX-003",
+      "properties": {
+        "assetType": "Distribution Transformer",
+        "assetId": "TX-003",
+        "status": "Maintenance",
+        "condition": "Fair",
+        "ratingKVA": 250,
+        "primaryVoltage": "11KV",
+        "secondaryVoltage": "415V",
+        "feederId": "FDR-22",
+        "manufacturer": "Schneider Electric",
+        "installationYear": 2021,
+        "loadPercent": 63,
+        "oilTemperatureC": 57,
+        "lastInspectionDate": "2026-04-04",
+        "poleMounted": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.239782,
+          17.699169
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TX-004",
+      "properties": {
+        "assetType": "Distribution Transformer",
+        "assetId": "TX-004",
+        "status": "Outage",
+        "condition": "Needs Inspection",
+        "ratingKVA": 315,
+        "primaryVoltage": "11KV",
+        "secondaryVoltage": "415V",
+        "feederId": "FDR-31",
+        "manufacturer": "ABB",
+        "installationYear": 2022,
+        "loadPercent": 70,
+        "oilTemperatureC": 60,
+        "lastInspectionDate": "2026-05-05",
+        "poleMounted": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.253796,
+          17.657886
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TX-005",
+      "properties": {
+        "assetType": "Distribution Transformer",
+        "assetId": "TX-005",
+        "status": "Planned",
+        "condition": "Good",
+        "ratingKVA": 500,
+        "primaryVoltage": "11KV",
+        "secondaryVoltage": "415V",
+        "feederId": "FDR-11",
+        "manufacturer": "CG Power",
+        "installationYear": 2023,
+        "loadPercent": 77,
+        "oilTemperatureC": 63,
+        "lastInspectionDate": "2026-06-06",
+        "poleMounted": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.211473,
+          17.653886
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TX-006",
+      "properties": {
+        "assetType": "Distribution Transformer",
+        "assetId": "TX-006",
+        "status": "Active",
+        "condition": "Good",
+        "ratingKVA": 63,
+        "primaryVoltage": "11KV",
+        "secondaryVoltage": "415V",
+        "feederId": "FDR-12",
+        "manufacturer": "BHEL",
+        "installationYear": 2024,
+        "loadPercent": 84,
+        "oilTemperatureC": 66,
+        "lastInspectionDate": "2026-07-07",
+        "poleMounted": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.193177,
+          17.687175
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TX-007",
+      "properties": {
+        "assetType": "Distribution Transformer",
+        "assetId": "TX-007",
+        "status": "Active",
+        "condition": "Fair",
+        "ratingKVA": 100,
+        "primaryVoltage": "11KV",
+        "secondaryVoltage": "415V",
+        "feederId": "FDR-21",
+        "manufacturer": "Schneider Electric",
+        "installationYear": 2025,
+        "loadPercent": 91,
+        "oilTemperatureC": 69,
+        "lastInspectionDate": "2026-08-08",
+        "poleMounted": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.175888,
+          17.665719
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TX-008",
+      "properties": {
+        "assetType": "Distribution Transformer",
+        "assetId": "TX-008",
+        "status": "Active",
+        "condition": "Fair",
+        "ratingKVA": 160,
+        "primaryVoltage": "11KV",
+        "secondaryVoltage": "415V",
+        "feederId": "FDR-22",
+        "manufacturer": "ABB",
+        "installationYear": 2018,
+        "loadPercent": 46,
+        "oilTemperatureC": 72,
+        "lastInspectionDate": "2026-01-09",
+        "poleMounted": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.23199,
+          17.689946
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TX-009",
+      "properties": {
+        "assetType": "Distribution Transformer",
+        "assetId": "TX-009",
+        "status": "Maintenance",
+        "condition": "Needs Inspection",
+        "ratingKVA": 250,
+        "primaryVoltage": "11KV",
+        "secondaryVoltage": "415V",
+        "feederId": "FDR-31",
+        "manufacturer": "CG Power",
+        "installationYear": 2019,
+        "loadPercent": 53,
+        "oilTemperatureC": 50,
+        "lastInspectionDate": "2026-02-10",
+        "poleMounted": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.19334,
+          17.693049
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TX-010",
+      "properties": {
+        "assetType": "Distribution Transformer",
+        "assetId": "TX-010",
+        "status": "Outage",
+        "condition": "Good",
+        "ratingKVA": 315,
+        "primaryVoltage": "11KV",
+        "secondaryVoltage": "415V",
+        "feederId": "FDR-11",
+        "manufacturer": "BHEL",
+        "installationYear": 2020,
+        "loadPercent": 60,
+        "oilTemperatureC": 53,
+        "lastInspectionDate": "2026-03-11",
+        "poleMounted": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.246349,
+          17.652255
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-001",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-001",
+        "status": "Active",
+        "condition": "Good",
+        "poleMaterial": "Steel",
+        "poleHeightM": 9,
+        "feederId": "FDR-12",
+        "installationYear": 2018,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-02-02",
+        "streetName": "Beach Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.1695,
+          17.675295
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-002",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-002",
+        "status": "Active",
+        "condition": "Fair",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 10,
+        "feederId": "FDR-21",
+        "installationYear": 2019,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-03-03",
+        "streetName": "NH16 Service Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.1705,
+          17.693759
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-003",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-003",
+        "status": "Maintenance",
+        "condition": "Fair",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 12,
+        "feederId": "FDR-22",
+        "installationYear": 2020,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-04-04",
+        "streetName": "Gajuwaka Main Road",
+        "assetCriticality": "High"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.1715,
+          17.712163
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-004",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-004",
+        "status": "Outage",
+        "condition": "Needs Inspection",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 8,
+        "feederId": "FDR-31",
+        "installationYear": 2021,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-05-05",
+        "streetName": "MVP Colony Road",
+        "assetCriticality": "Low"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.175,
+          17.658483
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-005",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-005",
+        "status": "Planned",
+        "condition": "Good",
+        "poleMaterial": "Steel",
+        "poleHeightM": 9,
+        "feederId": "FDR-11",
+        "installationYear": 2022,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-06-06",
+        "streetName": "Beach Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.176,
+          17.676698
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-006",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-006",
+        "status": "Active",
+        "condition": "Good",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 10,
+        "feederId": "FDR-12",
+        "installationYear": 2023,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-07-07",
+        "streetName": "NH16 Service Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.177,
+          17.694795
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-007",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-007",
+        "status": "Active",
+        "condition": "Fair",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 12,
+        "feederId": "FDR-21",
+        "installationYear": 2024,
+        "ownership": "Utility",
+        "groundingStatus": "Inspection Required",
+        "lastInspectionDate": "2026-08-08",
+        "streetName": "Gajuwaka Main Road",
+        "assetCriticality": "High"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.178,
+          17.712768
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-008",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-008",
+        "status": "Active",
+        "condition": "Fair",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 8,
+        "feederId": "FDR-22",
+        "installationYear": 2025,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-09-09",
+        "streetName": "MVP Colony Road",
+        "assetCriticality": "Low"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.1815,
+          17.658619
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-009",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-009",
+        "status": "Maintenance",
+        "condition": "Needs Inspection",
+        "poleMaterial": "Steel",
+        "poleHeightM": 9,
+        "feederId": "FDR-31",
+        "installationYear": 2017,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-01-10",
+        "streetName": "Beach Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.1825,
+          17.676356
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-010",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-010",
+        "status": "Outage",
+        "condition": "Good",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 10,
+        "feederId": "FDR-11",
+        "installationYear": 2018,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-02-11",
+        "streetName": "NH16 Service Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.1835,
+          17.693997
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-011",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-011",
+        "status": "Planned",
+        "condition": "Good",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 12,
+        "feederId": "FDR-12",
+        "installationYear": 2019,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-03-12",
+        "streetName": "Gajuwaka Main Road",
+        "assetCriticality": "High"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.1845,
+          17.711563
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-012",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-012",
+        "status": "Active",
+        "condition": "Fair",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 8,
+        "feederId": "FDR-21",
+        "installationYear": 2020,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-04-13",
+        "streetName": "MVP Colony Road",
+        "assetCriticality": "Low"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.188,
+          17.657082
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-013",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-013",
+        "status": "Active",
+        "condition": "Fair",
+        "poleMaterial": "Steel",
+        "poleHeightM": 9,
+        "feederId": "FDR-22",
+        "installationYear": 2021,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-05-14",
+        "streetName": "Beach Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.189,
+          17.674584
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-014",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-014",
+        "status": "Active",
+        "condition": "Needs Inspection",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 10,
+        "feederId": "FDR-31",
+        "installationYear": 2022,
+        "ownership": "Utility",
+        "groundingStatus": "Inspection Required",
+        "lastInspectionDate": "2026-06-15",
+        "streetName": "NH16 Service Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.19,
+          17.692098
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-015",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-015",
+        "status": "Maintenance",
+        "condition": "Good",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 12,
+        "feederId": "FDR-11",
+        "installationYear": 2023,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-07-16",
+        "streetName": "Gajuwaka Main Road",
+        "assetCriticality": "High"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.191,
+          17.709657
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-016",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-016",
+        "status": "Outage",
+        "condition": "Good",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 8,
+        "feederId": "FDR-12",
+        "installationYear": 2024,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-08-17",
+        "streetName": "MVP Colony Road",
+        "assetCriticality": "Low"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.1945,
+          17.655286
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-017",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-017",
+        "status": "Planned",
+        "condition": "Fair",
+        "poleMaterial": "Steel",
+        "poleHeightM": 9,
+        "feederId": "FDR-21",
+        "installationYear": 2025,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-09-18",
+        "streetName": "Beach Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.1955,
+          17.67301
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-018",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-018",
+        "status": "Active",
+        "condition": "Fair",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 10,
+        "feederId": "FDR-22",
+        "installationYear": 2017,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-01-19",
+        "streetName": "NH16 Service Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.1965,
+          17.690845
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-019",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-019",
+        "status": "Active",
+        "condition": "Needs Inspection",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 12,
+        "feederId": "FDR-31",
+        "installationYear": 2018,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-02-20",
+        "streetName": "Gajuwaka Main Road",
+        "assetCriticality": "High"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.1975,
+          17.708801
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-020",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-020",
+        "status": "Active",
+        "condition": "Good",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 8,
+        "feederId": "FDR-11",
+        "installationYear": 2019,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-03-21",
+        "streetName": "MVP Colony Road",
+        "assetCriticality": "Low"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.201,
+          17.654882
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-021",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-021",
+        "status": "Maintenance",
+        "condition": "Good",
+        "poleMaterial": "Steel",
+        "poleHeightM": 9,
+        "feederId": "FDR-12",
+        "installationYear": 2020,
+        "ownership": "Utility",
+        "groundingStatus": "Inspection Required",
+        "lastInspectionDate": "2026-04-01",
+        "streetName": "Beach Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.202,
+          17.673082
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-022",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-022",
+        "status": "Outage",
+        "condition": "Fair",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 10,
+        "feederId": "FDR-21",
+        "installationYear": 2021,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-05-02",
+        "streetName": "NH16 Service Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.203,
+          17.691389
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-023",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-023",
+        "status": "Planned",
+        "condition": "Fair",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 12,
+        "feederId": "FDR-22",
+        "installationYear": 2022,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-06-03",
+        "streetName": "Gajuwaka Main Road",
+        "assetCriticality": "High"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.204,
+          17.709783
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-024",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-024",
+        "status": "Active",
+        "condition": "Needs Inspection",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 8,
+        "feederId": "FDR-31",
+        "installationYear": 2023,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-07-04",
+        "streetName": "MVP Colony Road",
+        "assetCriticality": "Low"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2075,
+          17.656241
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-025",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-025",
+        "status": "Active",
+        "condition": "Good",
+        "poleMaterial": "Steel",
+        "poleHeightM": 9,
+        "feederId": "FDR-11",
+        "installationYear": 2024,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-08-05",
+        "streetName": "Beach Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2085,
+          17.674734
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-026",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-026",
+        "status": "Active",
+        "condition": "Good",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 10,
+        "feederId": "FDR-12",
+        "installationYear": 2025,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-09-06",
+        "streetName": "NH16 Service Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2095,
+          17.69323
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-027",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-027",
+        "status": "Maintenance",
+        "condition": "Fair",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 12,
+        "feederId": "FDR-21",
+        "installationYear": 2017,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-01-07",
+        "streetName": "Gajuwaka Main Road",
+        "assetCriticality": "High"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2105,
+          17.7117
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-028",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-028",
+        "status": "Outage",
+        "condition": "Fair",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 8,
+        "feederId": "FDR-22",
+        "installationYear": 2018,
+        "ownership": "Utility",
+        "groundingStatus": "Inspection Required",
+        "lastInspectionDate": "2026-02-08",
+        "streetName": "MVP Colony Road",
+        "assetCriticality": "Low"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.214,
+          17.658114
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-029",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-029",
+        "status": "Planned",
+        "condition": "Needs Inspection",
+        "poleMaterial": "Steel",
+        "poleHeightM": 9,
+        "feederId": "FDR-31",
+        "installationYear": 2019,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-03-09",
+        "streetName": "Beach Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.215,
+          17.676446
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-030",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-030",
+        "status": "Active",
+        "condition": "Good",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 10,
+        "feederId": "FDR-11",
+        "installationYear": 2020,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-04-10",
+        "streetName": "NH16 Service Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.216,
+          17.694676
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-031",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-031",
+        "status": "Active",
+        "condition": "Good",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 12,
+        "feederId": "FDR-12",
+        "installationYear": 2021,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-05-11",
+        "streetName": "Gajuwaka Main Road",
+        "assetCriticality": "High"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.217,
+          17.712789
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-032",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-032",
+        "status": "Active",
+        "condition": "Fair",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 8,
+        "feederId": "FDR-21",
+        "installationYear": 2022,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-06-12",
+        "streetName": "MVP Colony Road",
+        "assetCriticality": "Low"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2205,
+          17.658779
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-033",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-033",
+        "status": "Maintenance",
+        "condition": "Fair",
+        "poleMaterial": "Steel",
+        "poleHeightM": 9,
+        "feederId": "FDR-22",
+        "installationYear": 2023,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-07-13",
+        "streetName": "Beach Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2215,
+          17.676645
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-034",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-034",
+        "status": "Outage",
+        "condition": "Needs Inspection",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 10,
+        "feederId": "FDR-31",
+        "installationYear": 2024,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-08-14",
+        "streetName": "NH16 Service Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2225,
+          17.694397
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-035",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-035",
+        "status": "Planned",
+        "condition": "Good",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 12,
+        "feederId": "FDR-11",
+        "installationYear": 2025,
+        "ownership": "Utility",
+        "groundingStatus": "Inspection Required",
+        "lastInspectionDate": "2026-09-15",
+        "streetName": "Gajuwaka Main Road",
+        "assetCriticality": "High"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2235,
+          17.712049
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-036",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-036",
+        "status": "Active",
+        "condition": "Good",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 8,
+        "feederId": "FDR-12",
+        "installationYear": 2017,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-01-16",
+        "streetName": "MVP Colony Road",
+        "assetCriticality": "Low"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.227,
+          17.657624
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-037",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-037",
+        "status": "Active",
+        "condition": "Fair",
+        "poleMaterial": "Steel",
+        "poleHeightM": 9,
+        "feederId": "FDR-21",
+        "installationYear": 2018,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-02-17",
+        "streetName": "Beach Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.228,
+          17.675148
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-038",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-038",
+        "status": "Active",
+        "condition": "Fair",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 10,
+        "feederId": "FDR-22",
+        "installationYear": 2019,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-03-18",
+        "streetName": "NH16 Service Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.229,
+          17.69265
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-039",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-039",
+        "status": "Maintenance",
+        "condition": "Needs Inspection",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 12,
+        "feederId": "FDR-31",
+        "installationYear": 2020,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-04-19",
+        "streetName": "Gajuwaka Main Road",
+        "assetCriticality": "High"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.23,
+          17.710161
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-040",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-040",
+        "status": "Outage",
+        "condition": "Good",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 8,
+        "feederId": "FDR-11",
+        "installationYear": 2021,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-05-20",
+        "streetName": "MVP Colony Road",
+        "assetCriticality": "Low"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2335,
+          17.655712
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-041",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-041",
+        "status": "Planned",
+        "condition": "Good",
+        "poleMaterial": "Steel",
+        "poleHeightM": 9,
+        "feederId": "FDR-12",
+        "installationYear": 2022,
+        "ownership": "Utility",
+        "groundingStatus": "Compliant",
+        "lastInspectionDate": "2026-06-21",
+        "streetName": "Beach Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2345,
+          17.673331
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "P-042",
+      "properties": {
+        "assetType": "Pole",
+        "assetId": "P-042",
+        "status": "Active",
+        "condition": "Fair",
+        "poleMaterial": "Concrete",
+        "poleHeightM": 10,
+        "feederId": "FDR-21",
+        "installationYear": 2023,
+        "ownership": "Utility",
+        "groundingStatus": "Inspection Required",
+        "lastInspectionDate": "2026-07-01",
+        "streetName": "NH16 Service Road",
+        "assetCriticality": "Medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2355,
+          17.691041
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SW-001",
+      "properties": {
+        "assetType": "Switch",
+        "assetId": "SW-001",
+        "status": "Closed",
+        "condition": "Good",
+        "switchType": "Isolator",
+        "feederId": "FDR-12",
+        "voltage": "11KV",
+        "remoteOperable": true,
+        "lastOperationDate": "2026-02-02",
+        "faultCount12M": 1,
+        "maintenanceDue": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.1758,
+          17.659083
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SW-002",
+      "properties": {
+        "assetType": "Switch",
+        "assetId": "SW-002",
+        "status": "Closed",
+        "condition": "Fair",
+        "switchType": "Recloser",
+        "feederId": "FDR-21",
+        "voltage": "11KV",
+        "remoteOperable": true,
+        "lastOperationDate": "2026-03-03",
+        "faultCount12M": 2,
+        "maintenanceDue": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.1788,
+          17.713368
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SW-003",
+      "properties": {
+        "assetType": "Switch",
+        "assetId": "SW-003",
+        "status": "Closed",
+        "condition": "Fair",
+        "switchType": "Load Break Switch",
+        "feederId": "FDR-22",
+        "voltage": "11KV",
+        "remoteOperable": false,
+        "lastOperationDate": "2026-04-04",
+        "faultCount12M": 3,
+        "maintenanceDue": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.1843,
+          17.694596999999998
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SW-004",
+      "properties": {
+        "assetType": "Switch",
+        "assetId": "SW-004",
+        "status": "Open",
+        "condition": "Needs Inspection",
+        "switchType": "Isolator",
+        "feederId": "FDR-31",
+        "voltage": "11KV",
+        "remoteOperable": true,
+        "lastOperationDate": "2026-05-05",
+        "faultCount12M": 4,
+        "maintenanceDue": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.18979999999999,
+          17.675183999999998
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SW-005",
+      "properties": {
+        "assetType": "Switch",
+        "assetId": "SW-005",
+        "status": "Closed",
+        "condition": "Good",
+        "switchType": "Recloser",
+        "feederId": "FDR-11",
+        "voltage": "11KV",
+        "remoteOperable": true,
+        "lastOperationDate": "2026-06-06",
+        "faultCount12M": 0,
+        "maintenanceDue": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.1953,
+          17.655886
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SW-006",
+      "properties": {
+        "assetType": "Switch",
+        "assetId": "SW-006",
+        "status": "Closed",
+        "condition": "Good",
+        "switchType": "Load Break Switch",
+        "feederId": "FDR-12",
+        "voltage": "11KV",
+        "remoteOperable": false,
+        "lastOperationDate": "2026-07-07",
+        "faultCount12M": 1,
+        "maintenanceDue": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.1983,
+          17.709401
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SW-007",
+      "properties": {
+        "assetType": "Switch",
+        "assetId": "SW-007",
+        "status": "Closed",
+        "condition": "Fair",
+        "switchType": "Isolator",
+        "feederId": "FDR-21",
+        "voltage": "11KV",
+        "remoteOperable": true,
+        "lastOperationDate": "2026-01-08",
+        "faultCount12M": 2,
+        "maintenanceDue": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2038,
+          17.691989
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SW-008",
+      "properties": {
+        "assetType": "Switch",
+        "assetId": "SW-008",
+        "status": "Open",
+        "condition": "Fair",
+        "switchType": "Recloser",
+        "feederId": "FDR-22",
+        "voltage": "11KV",
+        "remoteOperable": true,
+        "lastOperationDate": "2026-02-09",
+        "faultCount12M": 3,
+        "maintenanceDue": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2093,
+          17.675334
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SW-009",
+      "properties": {
+        "assetType": "Switch",
+        "assetId": "SW-009",
+        "status": "Closed",
+        "condition": "Needs Inspection",
+        "switchType": "Load Break Switch",
+        "feederId": "FDR-31",
+        "voltage": "11KV",
+        "remoteOperable": false,
+        "lastOperationDate": "2026-03-10",
+        "faultCount12M": 4,
+        "maintenanceDue": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2148,
+          17.658714
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SW-010",
+      "properties": {
+        "assetType": "Switch",
+        "assetId": "SW-010",
+        "status": "Closed",
+        "condition": "Good",
+        "switchType": "Isolator",
+        "feederId": "FDR-11",
+        "voltage": "11KV",
+        "remoteOperable": true,
+        "lastOperationDate": "2026-04-11",
+        "faultCount12M": 0,
+        "maintenanceDue": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2178,
+          17.713389
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SW-011",
+      "properties": {
+        "assetType": "Switch",
+        "assetId": "SW-011",
+        "status": "Closed",
+        "condition": "Good",
+        "switchType": "Recloser",
+        "feederId": "FDR-12",
+        "voltage": "11KV",
+        "remoteOperable": true,
+        "lastOperationDate": "2026-05-12",
+        "faultCount12M": 1,
+        "maintenanceDue": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.2233,
+          17.694996999999997
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SW-012",
+      "properties": {
+        "assetType": "Switch",
+        "assetId": "SW-012",
+        "status": "Open",
+        "condition": "Fair",
+        "switchType": "Load Break Switch",
+        "feederId": "FDR-21",
+        "voltage": "11KV",
+        "remoteOperable": false,
+        "lastOperationDate": "2026-06-13",
+        "faultCount12M": 2,
+        "maintenanceDue": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.22879999999999,
+          17.675748
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MTR-001",
+      "properties": {
+        "assetType": "Smart Meter",
+        "assetId": "MTR-001",
+        "status": "Active",
+        "meterNumber": "VMTR2600001",
+        "customerCategory": "Commercial",
+        "tariffCode": "LT-2",
+        "connectedLoadKW": 5,
+        "monthlyConsumptionKWh": 253,
+        "communication": "RF Mesh",
+        "lastReadingDate": "2026-08-02",
+        "transformerId": "TX-002",
+        "serviceAreaId": "SA-002"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.25214,
+          17.702651
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MTR-002",
+      "properties": {
+        "assetType": "Smart Meter",
+        "assetId": "MTR-002",
+        "status": "Active",
+        "meterNumber": "VMTR2600002",
+        "customerCategory": "Industrial",
+        "tariffCode": "HT-1",
+        "connectedLoadKW": 10,
+        "monthlyConsumptionKWh": 326,
+        "communication": "4G",
+        "lastReadingDate": "2026-08-03",
+        "transformerId": "TX-003",
+        "serviceAreaId": "SA-003"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.200928,
+          17.659238
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MTR-003",
+      "properties": {
+        "assetType": "Smart Meter",
+        "assetId": "MTR-003",
+        "status": "Active",
+        "meterNumber": "VMTR2600003",
+        "customerCategory": "Residential",
+        "tariffCode": "LT-1",
+        "connectedLoadKW": 25,
+        "monthlyConsumptionKWh": 399,
+        "communication": "RF Mesh",
+        "lastReadingDate": "2026-08-04",
+        "transformerId": "TX-004",
+        "serviceAreaId": "SA-004"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.268793,
+          17.673728
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MTR-004",
+      "properties": {
+        "assetType": "Smart Meter",
+        "assetId": "MTR-004",
+        "status": "Active",
+        "meterNumber": "VMTR2600004",
+        "customerCategory": "Commercial",
+        "tariffCode": "LT-2",
+        "connectedLoadKW": 50,
+        "monthlyConsumptionKWh": 472,
+        "communication": "4G",
+        "lastReadingDate": "2026-08-05",
+        "transformerId": "TX-005",
+        "serviceAreaId": "SA-005"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.173702,
+          17.654537
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MTR-005",
+      "properties": {
+        "assetType": "Smart Meter",
+        "assetId": "MTR-005",
+        "status": "Active",
+        "meterNumber": "VMTR2600005",
+        "customerCategory": "Industrial",
+        "tariffCode": "HT-1",
+        "connectedLoadKW": 3,
+        "monthlyConsumptionKWh": 545,
+        "communication": "RF Mesh",
+        "lastReadingDate": "2026-08-06",
+        "transformerId": "TX-006",
+        "serviceAreaId": "SA-006"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.256724,
+          17.695098
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MTR-006",
+      "properties": {
+        "assetType": "Smart Meter",
+        "assetId": "MTR-006",
+        "status": "Active",
+        "meterNumber": "VMTR2600006",
+        "customerCategory": "Residential",
+        "tariffCode": "LT-1",
+        "connectedLoadKW": 5,
+        "monthlyConsumptionKWh": 618,
+        "communication": "4G",
+        "lastReadingDate": "2026-08-07",
+        "transformerId": "TX-007",
+        "serviceAreaId": "SA-001"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.252284,
+          17.705179
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MTR-007",
+      "properties": {
+        "assetType": "Smart Meter",
+        "assetId": "MTR-007",
+        "status": "Communication Failure",
+        "meterNumber": "VMTR2600007",
+        "customerCategory": "Commercial",
+        "tariffCode": "LT-2",
+        "connectedLoadKW": 10,
+        "monthlyConsumptionKWh": 691,
+        "communication": "RF Mesh",
+        "lastReadingDate": "2026-08-08",
+        "transformerId": "TX-008",
+        "serviceAreaId": "SA-002"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.222485,
+          17.724649
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MTR-008",
+      "properties": {
+        "assetType": "Smart Meter",
+        "assetId": "MTR-008",
+        "status": "Active",
+        "meterNumber": "VMTR2600008",
+        "customerCategory": "Industrial",
+        "tariffCode": "HT-1",
+        "connectedLoadKW": 25,
+        "monthlyConsumptionKWh": 764,
+        "communication": "4G",
+        "lastReadingDate": "2026-08-09",
+        "transformerId": "TX-009",
+        "serviceAreaId": "SA-003"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.205139,
+          17.690963
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MTR-009",
+      "properties": {
+        "assetType": "Smart Meter",
+        "assetId": "MTR-009",
+        "status": "Active",
+        "meterNumber": "VMTR2600009",
+        "customerCategory": "Residential",
+        "tariffCode": "LT-1",
+        "connectedLoadKW": 50,
+        "monthlyConsumptionKWh": 837,
+        "communication": "RF Mesh",
+        "lastReadingDate": "2026-08-10",
+        "transformerId": "TX-010",
+        "serviceAreaId": "SA-004"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.254735,
+          17.696282
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MTR-010",
+      "properties": {
+        "assetType": "Smart Meter",
+        "assetId": "MTR-010",
+        "status": "Active",
+        "meterNumber": "VMTR2600010",
+        "customerCategory": "Commercial",
+        "tariffCode": "LT-2",
+        "connectedLoadKW": 3,
+        "monthlyConsumptionKWh": 910,
+        "communication": "4G",
+        "lastReadingDate": "2026-08-11",
+        "transformerId": "TX-001",
+        "serviceAreaId": "SA-005"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          83.258288,
+          17.692988
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PL-001",
+      "properties": {
+        "assetType": "Power Line",
+        "assetId": "PL-001",
+        "status": "In Service",
+        "condition": "Good",
+        "voltage": "33KV",
+        "conductorType": "ACSR",
+        "circuitType": "Three Phase",
+        "feederId": "FDR-12",
+        "lengthMeters": 457.5,
+        "installationYear": 2016,
+        "owner": "Utility",
+        "faultCount12M": 1,
+        "lastPatrolDate": "2026-02-02",
+        "parentSubstationId": "SS-002"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.1715,
+            17.712163
+          ],
+          [
+            83.175,
+            17.658483
+          ],
+          [
+            83.176,
+            17.676698
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PL-002",
+      "properties": {
+        "assetType": "Power Line",
+        "assetId": "PL-002",
+        "status": "In Service",
+        "condition": "Fair",
+        "voltage": "415V",
+        "conductorType": "ABC",
+        "circuitType": "Three Phase",
+        "feederId": "FDR-21",
+        "lengthMeters": 495.0,
+        "installationYear": 2017,
+        "owner": "Utility",
+        "faultCount12M": 2,
+        "lastPatrolDate": "2026-03-03",
+        "parentSubstationId": "SS-003"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.176,
+            17.676698
+          ],
+          [
+            83.177,
+            17.694795
+          ],
+          [
+            83.178,
+            17.712768
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PL-003",
+      "properties": {
+        "assetType": "Power Line",
+        "assetId": "PL-003",
+        "status": "In Service",
+        "condition": "Fair",
+        "voltage": "11KV",
+        "conductorType": "AAAC",
+        "circuitType": "Three Phase",
+        "feederId": "FDR-22",
+        "lengthMeters": 532.5,
+        "installationYear": 2018,
+        "owner": "Utility",
+        "faultCount12M": 3,
+        "lastPatrolDate": "2026-04-04",
+        "parentSubstationId": "SS-004"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.178,
+            17.712768
+          ],
+          [
+            83.1815,
+            17.658619
+          ],
+          [
+            83.1825,
+            17.676356
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PL-004",
+      "properties": {
+        "assetType": "Power Line",
+        "assetId": "PL-004",
+        "status": "In Service",
+        "condition": "Needs Inspection",
+        "voltage": "33KV",
+        "conductorType": "ACSR",
+        "circuitType": "Three Phase",
+        "feederId": "FDR-31",
+        "lengthMeters": 570.0,
+        "installationYear": 2019,
+        "owner": "Utility",
+        "faultCount12M": 0,
+        "lastPatrolDate": "2026-05-05",
+        "parentSubstationId": "SS-005"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.1825,
+            17.676356
+          ],
+          [
+            83.1835,
+            17.693997
+          ],
+          [
+            83.1845,
+            17.711563
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PL-005",
+      "properties": {
+        "assetType": "Power Line",
+        "assetId": "PL-005",
+        "status": "In Service",
+        "condition": "Good",
+        "voltage": "415V",
+        "conductorType": "ABC",
+        "circuitType": "Three Phase",
+        "feederId": "FDR-11",
+        "lengthMeters": 607.5,
+        "installationYear": 2020,
+        "owner": "Utility",
+        "faultCount12M": 1,
+        "lastPatrolDate": "2026-06-06",
+        "parentSubstationId": "SS-006"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.1845,
+            17.711563
+          ],
+          [
+            83.188,
+            17.657082
+          ],
+          [
+            83.189,
+            17.674584
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PL-006",
+      "properties": {
+        "assetType": "Power Line",
+        "assetId": "PL-006",
+        "status": "Maintenance",
+        "condition": "Good",
+        "voltage": "11KV",
+        "conductorType": "AAAC",
+        "circuitType": "Three Phase",
+        "feederId": "FDR-12",
+        "lengthMeters": 645.0,
+        "installationYear": 2021,
+        "owner": "Utility",
+        "faultCount12M": 2,
+        "lastPatrolDate": "2026-07-07",
+        "parentSubstationId": "SS-007"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.189,
+            17.674584
+          ],
+          [
+            83.19,
+            17.692098
+          ],
+          [
+            83.191,
+            17.709657
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PL-007",
+      "properties": {
+        "assetType": "Power Line",
+        "assetId": "PL-007",
+        "status": "In Service",
+        "condition": "Fair",
+        "voltage": "33KV",
+        "conductorType": "ACSR",
+        "circuitType": "Three Phase",
+        "feederId": "FDR-21",
+        "lengthMeters": 682.5,
+        "installationYear": 2022,
+        "owner": "Utility",
+        "faultCount12M": 3,
+        "lastPatrolDate": "2026-08-08",
+        "parentSubstationId": "SS-008"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.191,
+            17.709657
+          ],
+          [
+            83.1945,
+            17.655286
+          ],
+          [
+            83.1955,
+            17.67301
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PL-008",
+      "properties": {
+        "assetType": "Power Line",
+        "assetId": "PL-008",
+        "status": "In Service",
+        "condition": "Fair",
+        "voltage": "415V",
+        "conductorType": "ABC",
+        "circuitType": "Three Phase",
+        "feederId": "FDR-22",
+        "lengthMeters": 720.0,
+        "installationYear": 2023,
+        "owner": "Utility",
+        "faultCount12M": 0,
+        "lastPatrolDate": "2026-01-09",
+        "parentSubstationId": "SS-001"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.1955,
+            17.67301
+          ],
+          [
+            83.1965,
+            17.690845
+          ],
+          [
+            83.1975,
+            17.708801
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PL-009",
+      "properties": {
+        "assetType": "Power Line",
+        "assetId": "PL-009",
+        "status": "In Service",
+        "condition": "Needs Inspection",
+        "voltage": "11KV",
+        "conductorType": "AAAC",
+        "circuitType": "Three Phase",
+        "feederId": "FDR-31",
+        "lengthMeters": 757.5,
+        "installationYear": 2024,
+        "owner": "Utility",
+        "faultCount12M": 1,
+        "lastPatrolDate": "2026-02-10",
+        "parentSubstationId": "SS-002"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.1975,
+            17.708801
+          ],
+          [
+            83.201,
+            17.654882
+          ],
+          [
+            83.202,
+            17.673082
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PL-010",
+      "properties": {
+        "assetType": "Power Line",
+        "assetId": "PL-010",
+        "status": "In Service",
+        "condition": "Good",
+        "voltage": "33KV",
+        "conductorType": "ACSR",
+        "circuitType": "Three Phase",
+        "feederId": "FDR-11",
+        "lengthMeters": 795.0,
+        "installationYear": 2015,
+        "owner": "Utility",
+        "faultCount12M": 2,
+        "lastPatrolDate": "2026-03-11",
+        "parentSubstationId": "SS-003"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.202,
+            17.673082
+          ],
+          [
+            83.203,
+            17.691389
+          ],
+          [
+            83.204,
+            17.709783
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PL-011",
+      "properties": {
+        "assetType": "Power Line",
+        "assetId": "PL-011",
+        "status": "In Service",
+        "condition": "Good",
+        "voltage": "415V",
+        "conductorType": "ABC",
+        "circuitType": "Three Phase",
+        "feederId": "FDR-12",
+        "lengthMeters": 832.5,
+        "installationYear": 2016,
+        "owner": "Utility",
+        "faultCount12M": 3,
+        "lastPatrolDate": "2026-04-12",
+        "parentSubstationId": "SS-004"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.204,
+            17.709783
+          ],
+          [
+            83.2075,
+            17.656241
+          ],
+          [
+            83.2085,
+            17.674734
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PL-012",
+      "properties": {
+        "assetType": "Power Line",
+        "assetId": "PL-012",
+        "status": "Maintenance",
+        "condition": "Fair",
+        "voltage": "11KV",
+        "conductorType": "AAAC",
+        "circuitType": "Three Phase",
+        "feederId": "FDR-21",
+        "lengthMeters": 870.0,
+        "installationYear": 2017,
+        "owner": "Utility",
+        "faultCount12M": 0,
+        "lastPatrolDate": "2026-05-13",
+        "parentSubstationId": "SS-005"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.2085,
+            17.674734
+          ],
+          [
+            83.2095,
+            17.69323
+          ],
+          [
+            83.2105,
+            17.7117
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PL-013",
+      "properties": {
+        "assetType": "Power Line",
+        "assetId": "PL-013",
+        "status": "In Service",
+        "condition": "Fair",
+        "voltage": "33KV",
+        "conductorType": "ACSR",
+        "circuitType": "Three Phase",
+        "feederId": "FDR-22",
+        "lengthMeters": 907.5,
+        "installationYear": 2018,
+        "owner": "Utility",
+        "faultCount12M": 1,
+        "lastPatrolDate": "2026-06-14",
+        "parentSubstationId": "SS-006"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.2105,
+            17.7117
+          ],
+          [
+            83.214,
+            17.658114
+          ],
+          [
+            83.215,
+            17.676446
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PL-014",
+      "properties": {
+        "assetType": "Power Line",
+        "assetId": "PL-014",
+        "status": "In Service",
+        "condition": "Needs Inspection",
+        "voltage": "415V",
+        "conductorType": "ABC",
+        "circuitType": "Three Phase",
+        "feederId": "FDR-31",
+        "lengthMeters": 945.0,
+        "installationYear": 2019,
+        "owner": "Utility",
+        "faultCount12M": 2,
+        "lastPatrolDate": "2026-07-15",
+        "parentSubstationId": "SS-007"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.215,
+            17.676446
+          ],
+          [
+            83.216,
+            17.694676
+          ],
+          [
+            83.217,
+            17.712789
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PL-015",
+      "properties": {
+        "assetType": "Power Line",
+        "assetId": "PL-015",
+        "status": "In Service",
+        "condition": "Good",
+        "voltage": "11KV",
+        "conductorType": "AAAC",
+        "circuitType": "Three Phase",
+        "feederId": "FDR-11",
+        "lengthMeters": 982.5,
+        "installationYear": 2020,
+        "owner": "Utility",
+        "faultCount12M": 3,
+        "lastPatrolDate": "2026-08-16",
+        "parentSubstationId": "SS-008"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.217,
+            17.712789
+          ],
+          [
+            83.2205,
+            17.658779
+          ],
+          [
+            83.2215,
+            17.676645
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PL-016",
+      "properties": {
+        "assetType": "Power Line",
+        "assetId": "PL-016",
+        "status": "In Service",
+        "condition": "Good",
+        "voltage": "33KV",
+        "conductorType": "ACSR",
+        "circuitType": "Three Phase",
+        "feederId": "FDR-12",
+        "lengthMeters": 1020.0,
+        "installationYear": 2021,
+        "owner": "Utility",
+        "faultCount12M": 0,
+        "lastPatrolDate": "2026-01-17",
+        "parentSubstationId": "SS-001"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.2215,
+            17.676645
+          ],
+          [
+            83.2225,
+            17.694397
+          ],
+          [
+            83.2235,
+            17.712049
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PL-017",
+      "properties": {
+        "assetType": "Power Line",
+        "assetId": "PL-017",
+        "status": "In Service",
+        "condition": "Fair",
+        "voltage": "415V",
+        "conductorType": "ABC",
+        "circuitType": "Three Phase",
+        "feederId": "FDR-21",
+        "lengthMeters": 1057.5,
+        "installationYear": 2022,
+        "owner": "Utility",
+        "faultCount12M": 1,
+        "lastPatrolDate": "2026-02-18",
+        "parentSubstationId": "SS-002"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.2235,
+            17.712049
+          ],
+          [
+            83.227,
+            17.657624
+          ],
+          [
+            83.228,
+            17.675148
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PL-018",
+      "properties": {
+        "assetType": "Power Line",
+        "assetId": "PL-018",
+        "status": "Maintenance",
+        "condition": "Fair",
+        "voltage": "11KV",
+        "conductorType": "AAAC",
+        "circuitType": "Three Phase",
+        "feederId": "FDR-22",
+        "lengthMeters": 1095.0,
+        "installationYear": 2023,
+        "owner": "Utility",
+        "faultCount12M": 2,
+        "lastPatrolDate": "2026-03-19",
+        "parentSubstationId": "SS-003"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.228,
+            17.675148
+          ],
+          [
+            83.229,
+            17.69265
+          ],
+          [
+            83.23,
+            17.710161
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PL-019",
+      "properties": {
+        "assetType": "Power Line",
+        "assetId": "PL-019",
+        "status": "In Service",
+        "condition": "Needs Inspection",
+        "voltage": "33KV",
+        "conductorType": "ACSR",
+        "circuitType": "Three Phase",
+        "feederId": "FDR-31",
+        "lengthMeters": 1132.5,
+        "installationYear": 2024,
+        "owner": "Utility",
+        "faultCount12M": 3,
+        "lastPatrolDate": "2026-04-20",
+        "parentSubstationId": "SS-004"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.23,
+            17.710161
+          ],
+          [
+            83.2335,
+            17.655712
+          ],
+          [
+            83.2345,
+            17.673331
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PL-020",
+      "properties": {
+        "assetType": "Power Line",
+        "assetId": "PL-020",
+        "status": "In Service",
+        "condition": "Good",
+        "voltage": "415V",
+        "conductorType": "ABC",
+        "circuitType": "Three Phase",
+        "feederId": "FDR-11",
+        "lengthMeters": 1170.0,
+        "installationYear": 2015,
+        "owner": "Utility",
+        "faultCount12M": 0,
+        "lastPatrolDate": "2026-05-01",
+        "parentSubstationId": "SS-005"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.1695,
+            17.675295
+          ],
+          [
+            83.1705,
+            17.693759
+          ],
+          [
+            83.1715,
+            17.712163
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SA-001",
+      "properties": {
+        "assetType": "Service Area",
+        "assetId": "SA-001",
+        "status": "Active",
+        "areaName": "MVP Colony",
+        "customerCount": 865,
+        "connectedLoadMW": 2.45,
+        "peakDemandMW": 1.68,
+        "feederCount": 3,
+        "outageCount12M": 1,
+        "averageRestorationMinutes": 37,
+        "serviceReliability": 99.02,
+        "supervisor": "Field Supervisor 1"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.138,
+              17.6728
+            ],
+            [
+              83.174,
+              17.6728
+            ],
+            [
+              83.1749,
+              17.7008
+            ],
+            [
+              83.138,
+              17.7015
+            ],
+            [
+              83.138,
+              17.6728
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SA-002",
+      "properties": {
+        "assetType": "Service Area",
+        "assetId": "SA-002",
+        "status": "Active",
+        "areaName": "Siripuram",
+        "customerCount": 1080,
+        "connectedLoadMW": 3.1,
+        "peakDemandMW": 2.16,
+        "feederCount": 4,
+        "outageCount12M": 2,
+        "averageRestorationMinutes": 42,
+        "serviceReliability": 98.94,
+        "supervisor": "Field Supervisor 2"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.163,
+              17.6978
+            ],
+            [
+              83.199,
+              17.6978
+            ],
+            [
+              83.1999,
+              17.7258
+            ],
+            [
+              83.163,
+              17.7265
+            ],
+            [
+              83.163,
+              17.6978
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SA-003",
+      "properties": {
+        "assetType": "Service Area",
+        "assetId": "SA-003",
+        "status": "Active",
+        "areaName": "Gajuwaka",
+        "customerCount": 1295,
+        "connectedLoadMW": 3.75,
+        "peakDemandMW": 2.64,
+        "feederCount": 2,
+        "outageCount12M": 3,
+        "averageRestorationMinutes": 47,
+        "serviceReliability": 98.86,
+        "supervisor": "Field Supervisor 3"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.188,
+              17.6478
+            ],
+            [
+              83.224,
+              17.6478
+            ],
+            [
+              83.2249,
+              17.6758
+            ],
+            [
+              83.188,
+              17.6765
+            ],
+            [
+              83.188,
+              17.6478
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SA-004",
+      "properties": {
+        "assetType": "Service Area",
+        "assetId": "SA-004",
+        "status": "Active",
+        "areaName": "Madhurawada",
+        "customerCount": 1510,
+        "connectedLoadMW": 4.4,
+        "peakDemandMW": 3.12,
+        "feederCount": 3,
+        "outageCount12M": 0,
+        "averageRestorationMinutes": 52,
+        "serviceReliability": 98.78,
+        "supervisor": "Field Supervisor 4"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.213,
+              17.6728
+            ],
+            [
+              83.249,
+              17.6728
+            ],
+            [
+              83.2499,
+              17.7008
+            ],
+            [
+              83.213,
+              17.7015
+            ],
+            [
+              83.213,
+              17.6728
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SA-005",
+      "properties": {
+        "assetType": "Service Area",
+        "assetId": "SA-005",
+        "status": "Review Required",
+        "areaName": "Seethammadhara",
+        "customerCount": 1725,
+        "connectedLoadMW": 5.05,
+        "peakDemandMW": 3.6,
+        "feederCount": 4,
+        "outageCount12M": 1,
+        "averageRestorationMinutes": 57,
+        "serviceReliability": 98.7,
+        "supervisor": "Field Supervisor 5"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.238,
+              17.6978
+            ],
+            [
+              83.274,
+              17.6978
+            ],
+            [
+              83.2749,
+              17.7258
+            ],
+            [
+              83.238,
+              17.7265
+            ],
+            [
+              83.238,
+              17.6978
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SA-006",
+      "properties": {
+        "assetType": "Service Area",
+        "assetId": "SA-006",
+        "status": "Active",
+        "areaName": "Rushikonda",
+        "customerCount": 1940,
+        "connectedLoadMW": 5.7,
+        "peakDemandMW": 4.08,
+        "feederCount": 2,
+        "outageCount12M": 2,
+        "averageRestorationMinutes": 62,
+        "serviceReliability": 98.62,
+        "supervisor": "Field Supervisor 6"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.263,
+              17.6478
+            ],
+            [
+              83.299,
+              17.6478
+            ],
+            [
+              83.2999,
+              17.6758
+            ],
+            [
+              83.263,
+              17.6765
+            ],
+            [
+              83.263,
+              17.6478
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "FD-001",
+      "properties": {
+        "assetType": "Feeder",
+        "assetId": "FD-001",
+        "status": "Energized",
+        "feederId": "FDR-11",
+        "voltage": "11KV",
+        "sourceSubstationId": "SS-001",
+        "ratedCurrentA": 360,
+        "peakCurrentA": 212,
+        "customerCount": 1210,
+        "lineLengthKm": 5.35,
+        "protection": "Numerical Relay",
+        "lastInspectionDate": "2026-07-11"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.1695,
+            17.675295
+          ],
+          [
+            83.1705,
+            17.693759
+          ],
+          [
+            83.1715,
+            17.712163
+          ],
+          [
+            83.175,
+            17.658483
+          ],
+          [
+            83.176,
+            17.676698
+          ],
+          [
+            83.177,
+            17.694795
+          ],
+          [
+            83.178,
+            17.712768
+          ],
+          [
+            83.1815,
+            17.658619
+          ],
+          [
+            83.1825,
+            17.676356
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "FD-002",
+      "properties": {
+        "assetType": "Feeder",
+        "assetId": "FD-002",
+        "status": "Energized",
+        "feederId": "FDR-12",
+        "voltage": "11KV",
+        "sourceSubstationId": "SS-002",
+        "ratedCurrentA": 400,
+        "peakCurrentA": 244,
+        "customerCount": 1520,
+        "lineLengthKm": 6.5,
+        "protection": "Numerical Relay",
+        "lastInspectionDate": "2026-07-12"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.1835,
+            17.693997
+          ],
+          [
+            83.1845,
+            17.711563
+          ],
+          [
+            83.188,
+            17.657082
+          ],
+          [
+            83.189,
+            17.674584
+          ],
+          [
+            83.19,
+            17.692098
+          ],
+          [
+            83.191,
+            17.709657
+          ],
+          [
+            83.1945,
+            17.655286
+          ],
+          [
+            83.1955,
+            17.67301
+          ],
+          [
+            83.1965,
+            17.690845
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "FD-003",
+      "properties": {
+        "assetType": "Feeder",
+        "assetId": "FD-003",
+        "status": "Energized",
+        "feederId": "FDR-21",
+        "voltage": "11KV",
+        "sourceSubstationId": "SS-003",
+        "ratedCurrentA": 440,
+        "peakCurrentA": 276,
+        "customerCount": 1830,
+        "lineLengthKm": 7.65,
+        "protection": "Numerical Relay",
+        "lastInspectionDate": "2026-07-13"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.1975,
+            17.708801
+          ],
+          [
+            83.201,
+            17.654882
+          ],
+          [
+            83.202,
+            17.673082
+          ],
+          [
+            83.203,
+            17.691389
+          ],
+          [
+            83.204,
+            17.709783
+          ],
+          [
+            83.2075,
+            17.656241
+          ],
+          [
+            83.2085,
+            17.674734
+          ],
+          [
+            83.2095,
+            17.69323
+          ],
+          [
+            83.2105,
+            17.7117
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "FD-004",
+      "properties": {
+        "assetType": "Feeder",
+        "assetId": "FD-004",
+        "status": "De-energized",
+        "feederId": "FDR-22",
+        "voltage": "11KV",
+        "sourceSubstationId": "SS-004",
+        "ratedCurrentA": 480,
+        "peakCurrentA": 308,
+        "customerCount": 2140,
+        "lineLengthKm": 8.8,
+        "protection": "Numerical Relay",
+        "lastInspectionDate": "2026-07-14"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            83.214,
+            17.658114
+          ],
+          [
+            83.215,
+            17.676446
+          ],
+          [
+            83.216,
+            17.694676
+          ],
+          [
+            83.217,
+            17.712789
+          ],
+          [
+            83.2205,
+            17.658779
+          ],
+          [
+            83.2215,
+            17.676645
+          ],
+          [
+            83.2225,
+            17.694397
+          ],
+          [
+            83.2235,
+            17.712049
+          ],
+          [
+            83.227,
+            17.657624
+          ]
+        ]
+      }
+    }
+  ]
 }
