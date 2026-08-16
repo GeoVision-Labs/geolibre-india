@@ -115,7 +115,7 @@ The prototype contains multiple geometry types and realistic domain attributes f
 The data is synthetic and intended only for application development and demonstration.
 
 ## Current Architecture
-
+```text
                        GeoLibre India
                               |
                               v
@@ -154,18 +154,21 @@ Feature Information   Feature Actions
                |             |
                v             v
             Zoom To      Copy ID
- 
+```
+
 ## Identify Model
 
 Feature Identification is represented through a reusable IdentifyResult structure.
 
 Conceptually:
+```text
 {
   id,
   geometryType,
   layerId,
   properties
 }
+```
 
 This separates the application's feature identification model from the domain-specific attributes.
 
@@ -184,6 +187,7 @@ The goal is to allow the same feature interaction framework to work with differe
 - GitHub
 
 ## Repository Structure
+```text
 geolibre-india/
 |
 |-- src/
@@ -212,6 +216,7 @@ geolibre-india/
 |-- vite.config.ts
 |-- tsconfig.json
 |-- README.md
+```
 
 # Development Roadmap
 
@@ -324,6 +329,7 @@ GeoLibre India aims to provide a reusable geospatial foundation where common GIS
 - Cadastral GIS application
 
 #### Long-term direction is:
+```text
                     GeoLibre Core
                          |
         +----------------+----------------+
@@ -333,7 +339,7 @@ GeoLibre India aims to provide a reusable geospatial foundation where common GIS
         +----------------+----------------+
                          |
                   Shared GIS Tools
- 
+```
 
 # Getting Started
 
@@ -365,6 +371,7 @@ The current prototype demonstrates a utility GIS application using a synthetic u
 The deomonstration focuses on common GIS interaction rather than representing a production utility management system.
 
 The current workflow is:
+```text
 Map
  ↓
 Search / Map Click
@@ -376,7 +383,8 @@ Highlight
 Feature Information
  ↓
 Zoom to Feature / Copy ID
- 
+```
+
 ### Important Develpment Principle
 
 GeoLibre should remain domain-aware but not domain-dependent.
