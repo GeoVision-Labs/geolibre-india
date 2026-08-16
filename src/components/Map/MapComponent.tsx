@@ -11,7 +11,7 @@ import type { IdentifyResult } from "../../types/IdentifyResult";
 maplibregl.setWorkerUrl(workerUrl);
 
 type MapComponentProps = {
-	onFeatureSelect: (feature: IdentifyResult) => void;
+	onFeatureSelect: (feature: IdentifyResult | null) => void;
 	onMapReady?: (map: maplibregl.Map) => void;
 	searchValue?: string;
 	onClearSelection?: (clearFn: () => void) => void;

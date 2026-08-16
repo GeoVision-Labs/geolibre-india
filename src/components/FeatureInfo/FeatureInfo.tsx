@@ -16,14 +16,6 @@ function FeatureInfo({feature, onClose}: FeatureInforPorps) {
                 );
         }
 
-        const exclusiveFields = [
-                "geometry",
-                "type",
-                "id",
-                "layer",
-                "source",
-        ];
-
         const attributes = Object.entries(feature.properties).filter(
                 ([, value]) => 
                         value !== null &&
