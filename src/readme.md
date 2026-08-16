@@ -93,3 +93,232 @@ Feature B highlighted
       ↓
 Feature Information updated
 ```
+
+## Feature Information
+ 
+The Feature Information panel dynamically displays information for the selected feature.
+ 
+The panel currently provides:
+ 
+- Feature ID
+- Geometry type
+- Layer ID
+- Feature attributes
+ 
+Attributes are generated dynamically from the selected feature properties rather than being limited to a fixed number of fields.
+ 
+---
+ 
+## IdentifyResult
+ 
+The application uses an `IdentifyResult` type to represent the selected feature.
+ 
+Current structure:
+ 
+```ts
+{
+  id,
+  geometryType,
+  layerId,
+  properties
+}
+```
+
+The model separates feature metadata from the feature's domain attributes.
+
+## Feature Actions
+The Feature Information panel currently provides the following actions.
+
+### Zoom to Feature
+
+The application supports zooming to the selected feature.
+
+The behaviour depends on the geometry type:
+
+```text 
+Point
+  ↓
+MapLibre flyTo()
+ 
+LineString / Polygon
+  ↓
+Calculate bounding box
+  ↓
+MapLibre fitBounds()
+```
+
+Copy Feature ID
+The Feature Information panel provides a Copy ID action.
+The selected feature ID is copied to the system clipboard.
+
+## Search
+ 
+The application currently provides feature search using the utility dataset.
+ 
+The current search workflow is:
+ 
+```text
+Search
+   ↓
+Find Feature
+   ↓
+Highlight Feature
+   ↓
+Zoom to Feature
+   ↓
+Feature Information
+```
+
+Search results are presented as feature IDs.
+
+
+### Current Utility Dataset
+The current prototype uses a synthetic utility network dataset.
+The dataset contains multiple geometry types:
+```text
+Point
+LineString
+Polygon
+```
+
+The prototype contains realistic-style attributes for demonstrating GIS feature interaction.
+Example feature categories include:
+- Substations
+- Distribution transformers
+- Poles
+- Switches
+- Smart meters
+- Power lines
+- Feeders
+- Service areas
+
+The dataset is synthetic and is intended for application development and demonstration.
+
+## Current Application Workflow
+ 
+The current feature interaction workflow is:
+ 
+```text
+Map
+  ↓
+Search or Map Click
+  ↓
+Feature Selection
+  ↓
+Feature Highlight
+  ↓
+IdentifyResult
+  ↓
+Feature Information
+  ↓
++-------------------+
+|                   |
+v                   v
+Zoom to Feature   Copy Feature ID
+```
+The application supports the same feature information workflow for:
+Point features
+Line features
+Polygon features
+
+## Current Component Structure
+ 
+```text
+src/
+|
+|-- components/
+|   |
+|   |-- BasemapControl/
+|   |   |-- BasemapControl.tsx
+|   |
+|   |-- FeatureInfo/
+|   |   |-- FeatureInfo.tsx
+|   |
+|   |-- LayerControl/
+|   |   |-- LayerControl.tsx
+|   |
+|   |-- Map/
+|   |   |-- MapComponent.tsx
+|   |   |-- LocateControl.tsx
+|   |
+|   |-- Search/
+|       |-- Search.tsx
+|
+|-- data/
+|   |-- utility-network.json
+|
+|-- types/
+|   |-- IdentifyResult.ts
+|
+|-- App.tsx
+|-- main.tsx
+|-- global.css
+```
+## Current Architecture
+```text
+                         GeoLibre India
+                               |
+                               v
+                       React + TypeScript
+                               |
+              +----------------+----------------+
+              |                |                |
+              v                v                v
+        MapComponent        Search        LayerControl
+              |
+              v
+        MapLibre GL JS
+              |
+              v
+       GeoJSON Data Source
+              |
+       +------+------+
+       |             |
+     Point         Line / Polygon
+       |             |
+       +------+------+
+              |
+              v
+      Feature Selection
+              |
+              v
+       IdentifyResult
+              |
+       +------+------+
+       |             |
+       v             v
+Feature Information  Feature Actions
+                     |
+                +----+----+
+                |         |
+                v         v
+             Zoom To   Copy ID
+```
+
+## Current Development Status
+
+### Phase 1 — GIS Web Foundation
+
+The current implementation provides a functional GIS web application with:
+- Interactive MapLibre map
+- Basemap switching
+- Map navigation
+- Fullscreen control
+- Home / full extent control
+- Locate control
+- Scale display
+- Coordinate display
+- Layer visibility control
+- Point, line, and polygon visualization
+- Feature selection
+- Feature highlighting
+- Selection clearing
+- Dynamic Feature Information
+- Feature ID, geometry type, and layer information
+- Dynamic feature attributes
+- IdentifyResult model
+- Feature search
+- Zoom to feature
+- Copy Feature ID
+
+This document describes the current implemented state of the application.
