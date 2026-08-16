@@ -5,6 +5,7 @@ import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import utilityNetwork from '../../data/utility-network.json';
 import { bbox } from "@turf/bbox";
 import home from "/home.png";
+import LocateControl from "./LocateControl";
 
 maplibregl.setWorkerUrl(workerUrl);
 
@@ -181,6 +182,7 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 			unit: "metric",
 		}));
 		map.addControl(new HomeControl(), "top-right");
+		map.addControl(new LocateControl, "top-right");
 
 		const addUtilityLayers = () => {
 			if(!map.getSource("utility-network")) {
