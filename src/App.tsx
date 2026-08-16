@@ -7,11 +7,7 @@ import Search from "./components/Search/Search";
 import BasemapControl from "./components/BasemapControl/BasemapControl";
 
 function App() {
-        const [selectedFeature, setSelectedFeature] = useState<{
-                assetType?: string;
-                assetId?: string;
-                status?: string
-        } | null>(null);
+        const [selectedFeature, setSelectedFeature] = useState<Record<string, unknown> | null>(null);
 
         const [map, setMap] = useState<maplibregl.Map | null>(null);
         const [searchValue, setSearchValue] = useState("");

@@ -10,11 +10,7 @@ import LocateControl from "./LocateControl";
 maplibregl.setWorkerUrl(workerUrl);
 
 type MapComponentProps = {
-	onFeatureSelect: (feature: {
-		assetType?: string;
-		assetId?: string;
-		status?: string;
-	} | null) => void;
+	onFeatureSelect: (feature: Record<string, unknown> | null) => void;
 	onMapReady?: (map: maplibregl.Map) => void;
 	searchValue?: string;
 	onClearSelection?: (clearFn: () => void) => void;
@@ -116,13 +112,9 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 			);	
 		}
 
-		const properties = feature.properties;
+		const properties = feature.properties as Record<string, unknown> | undefined;
 
-		onFeatureSelect?.({
-					assetType: properties?.assetType,
-					assetId: properties?.assetId,
-					status: properties?.status,
-				});
+		onFeatureSelect?.(properties ?? null);
 	}
 
 	const clearSelection = (map: maplibregl.Map) => {
