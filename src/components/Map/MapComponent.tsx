@@ -191,8 +191,18 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 					source: "utility-network",
 					filter: ["==", ["geometry-type"], "LineString"],
 					paint: {
-						"line-color": "#ff6600",
-						"line-width": 4,
+						"line-color": [
+							"case",
+							["boolean", ["feature-state", "selected"], false],
+							"#ffa000",
+							"#ff6600",
+						],
+						"line-width": [
+							"case",
+							["boolean", ["feature-state", "selected"], false],
+							7,
+							4,
+						],
 					},
 				});
 			}
@@ -203,9 +213,24 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 					source: "utility-network",
 					filter: ["==", ["geometry-type"], "Polygon"],
 					paint: {
-						"fill-color": "#3388ff",
-						"fill-opacity": 0.2,
-						"fill-outline-color": "#3388ff",
+						"fill-color": [
+							"case",
+							["boolean", ["feature-state", "selected"], false],
+							"#ffa000",
+							"#3388ff",
+						],
+						"fill-opacity": [
+							"case",
+							["boolean", ["feature-state", "selected"], false],
+							0.45,
+							0.2,
+						],
+						"fill-outline-color": [
+							"case",
+							["boolean", ["feature-state", "selected"], false],
+							"#ffa000",
+							"#3388ff",
+						],
 					},
 				});
 			}
