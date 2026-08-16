@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import * as maplibregl from 'maplibre-gl';
 import "maplibre-gl/dist/maplibre-gl.css";
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
@@ -22,6 +22,10 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 	const selectedFeatureId = useRef<string | number>(null);
 	const mapContainer = useRef<HTMLDivElement | null>(null);
 	const mapRef = useRef<maplibregl.Map | null>(null);
+
+	const [coordinates, setCoordinates] = useState<{
+		lng: number;lat:number
+	} | null>(null);
 
 	const selectFeature = (map: maplibregl.Map, feature: any) => {
 		if (!feature) return;
@@ -100,7 +104,7 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 	}, [onClearSelection]);
 
 	useEffect(() => {
-		
+
 		if (!mapContainer.current) return;
 
 		const map = new maplibregl.Map({
@@ -112,7 +116,20 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 
 		mapRef.current = map;
 		map.on("error", (e) => { console.error("Map error:", e); });
+		
+		map.on("mousemove", (event) => {
+			setCoordinates({
+				lng: event.lngLat.lng,
+				lat: event.lngLat.lat,
+			});
+		});
+
+		map.addControl(new maplibregl.FullscreenControl(), "top-right");
 		map.addControl(new maplibregl.NavigationControl(), "top-right");
+		map.addControl(new maplibregl.ScaleControl({
+			maxWidth: 100,
+			unit: "metric",
+		}));
 
 		map.on("load", () => {
 
@@ -251,6 +268,23 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 	return (
 		<div style={{ position: "fixed", inset: 0, width: "100%", height: "100dvh", overflow: "hidden" }} >
 			<div ref={mapContainer} style={{width: "100%", height: "100%"}} />
+			{coordinates && (
+				<div
+					style={{
+						position: "absolute",
+						bottom: "10px",
+						left: "10px",
+						background: "white",
+						padding: "6px 10px",
+						borderRadius: "4px",
+						fontSize: "12px",
+						zIndex: 10,
+					}}>
+						Lat: {coordinates.lat.toFixed(5)}
+						{" | "}
+						Lon: {coordinates.lng.toFixed(5)}
+				</div>
+			)}
 		</div>
 	)
 }
