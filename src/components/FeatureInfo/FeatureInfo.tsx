@@ -5,9 +5,10 @@ type FeatureInforPorps = {
         feature: IdentifyResult | null;
         onClose?: () => void;
         onZoomToFeature?: () => void;
+        onCopyfeatureId?: () => void;
 };
 
-function FeatureInfo({feature, onClose, onZoomToFeature}: FeatureInforPorps) {
+function FeatureInfo({feature, onClose, onZoomToFeature, onCopyfeatureId }: FeatureInforPorps) {
         if(!feature) {
                 return(
                         <div className="feature-info">
@@ -54,9 +55,22 @@ function FeatureInfo({feature, onClose, onZoomToFeature}: FeatureInforPorps) {
                                 </div>
                         )}
                         {feature && (
-                                <button className='feature-into-action' onClick={onZoomToFeature} aria-label='Zoom to feature'>
-                                        Zoom to Feature
-                                </button>
+                                <div className='feature-info-actions'>
+                                        <button 
+                                                className='feature-into-action' 
+                                                onClick={onZoomToFeature} 
+                                                aria-label='Zoom to feature'
+                                        >
+                                                Zoom to Feature
+                                        </button>
+                                        <button 
+                                                className='feature-info-action'
+                                                onClick={onCopyfeatureId}
+                                                aria-label='Copy feature Id'
+                                        >
+                                                Copy ID
+                                        </button>
+                                </div>
                         )}
                         <div className='feature-attributes'>
                                 {attributes.map(([key, value]) => (

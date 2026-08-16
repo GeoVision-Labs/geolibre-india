@@ -67,6 +67,25 @@
         border-bottom: 1px solid #eee;
 }
 
+.feature-info-actions {
+        display: flex;
+        gap: 8px;
+        margin: 10px 0;
+}
+
+.feature-info-action {
+        flex: 1;
+        padding: 7px 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background: #fff;
+        cursor: pointer;
+}
+
+.feature-info-action:hover {
+        background: #f2f2f2;
+}
+
 .feature-row:last-child {
         border-bottom: none;
 }

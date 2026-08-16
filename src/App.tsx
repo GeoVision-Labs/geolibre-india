@@ -20,6 +20,18 @@ function App() {
                 setSearchValue(value);
         }
 
+        const copyFeatureId = async () => {
+                if(!selectedFeature) return;
+
+                try {
+                        await
+                        navigator.clipboard.writeText(String(selectedFeature.id));
+                        console.log("Feature ID copied: ", selectedFeature.id);
+                } catch (error) {
+                        console.error("Failed to copy feature ID: ", error);
+                }
+        }
+
         return (
                 <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
                         <MapComponent 
@@ -29,14 +41,17 @@ function App() {
                         onClearSelection={(clearFn) => setClearMapSelection(() => clearFn)}
                         onZoomToFeature={(zoomFn) => setZoomToFeature(() => zoomFn)}
                  />
-                        {selectedFeature && (<FeatureInfo feature={selectedFeature} onClose={
-                                () => {
-                                        clearMapSelection?.();
-                                        setSelectedFeature(null);
-                                }
-                        } onZoomToFeature={() => {
-                                zoomToFeature?.();
-                        }} />)}
+                        {selectedFeature && (
+                                <FeatureInfo feature={selectedFeature} onClose={
+                                        () => {
+                                                clearMapSelection?.();
+                                                setSelectedFeature(null);
+                                        }
+                                        } onZoomToFeature={() => {
+                                                zoomToFeature?.();
+                                        }} onCopyfeatureId={copyFeatureId}
+                                        />)
+                        }
                         <LayerControl map={map} />
                         <Search onSearch={handleSearch} />
                         <BasemapControl map={map} />
