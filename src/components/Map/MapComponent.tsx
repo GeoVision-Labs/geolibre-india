@@ -131,56 +131,60 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 			unit: "metric",
 		}));
 
+		const addUtilityLayers = () => {
+			if(!map.getSource("utility-network")) {
+				map.addSource("utility-network", {
+					type: "geojson",
+					data: utilityNetwork,
+					promoteId: "assetId",
+				});
+			}
+			if (!map.getLayer("power-lines")) {
+				map.addLayer({
+					id: "power-lines",
+					type: "line",
+					source: "utility-network",
+					filter: ["==", ["geometry-type"], "LineString"],
+					paint: {
+						"line-color": "#ff6600",
+						"line-width": 4,
+					},
+				});
+			}
+			if (!map.getLayer("service-areas")) {
+				map.addLayer({
+					id: "service-areas",
+					type: "fill",
+					source: "utility-network",
+					filter: ["==", ["geometry-type"], "Polygon"],
+					paint: {
+						"fill-color": "#3388ff",
+						"fill-opacity": 0.2,
+						"fill-outline-color": "#3388ff",
+					},
+				});
+			}
+			if (!map.getLayer("utility-points")) {
+				map.addLayer({
+					id: "utility-points",
+					type: "circle",
+					source: "utility-network",
+					filter: ["==", ["geometry-type"], "Point"],
+					paint: {
+						"circle-radius": 7,
+						"circle-color": [
+							"case", ["boolean", ["feature-state", "selected"], false], "#ffa000", "#00ff00"
+						],
+						"circle-stroke-color": "#ffffff",
+						"circle-stroke-width": 2,
+					},
+				});
+			}
+		};
+
 		map.on("load", () => {
 
 			onMapReady?.(map);
-
-			map.addSource("utility-network", {
-				type: "geojson",
-				data: utilityNetwork,
-				promoteId: "assetId",
-			});
-
-			map.addLayer({
-				id: 'power-lines',
-				type: 'line',
-				source: "utility-network",
-				filter: ["==", ["geometry-type"], "LineString"],
-				paint: {
-					"line-color": "#ff6600",
-					"line-width": 4,
-				},
-			});
-
-			map.addLayer({
-				id: 'service-areas',
-				type: "fill",
-				source: 'utility-network',
-				filter: ["==", ["geometry-type"], "Polygon"],
-				paint: {
-					"fill-color": "#3388ff",
-					"fill-opacity": 0.2,
-					"fill-outline-color": "#3388ff",
-				},
-			});
-
-			map.addLayer({
-				id: 'utility-points',
-				type: "circle",
-				source: "utility-network",
-				filter: ["==", ["geometry-type"], "Point"],
-				paint: {
-					"circle-radius": 7,
-					"circle-color": [
-						"case",
-						["boolean", ["feature-state", "selected"], false],
-						"#ffa000",
-						"#00ff00",
-					],
-					"circle-stroke-color": "#ffffff",
-					"circle-stroke-width": 2,
-				}
-			});
 
 			map.on("click", (event) => {
 				const pointFeatures = map.queryRenderedFeatures(event.point, {
@@ -220,6 +224,8 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 			});
 			
 		});
+
+		map.on("style.load", () => {addUtilityLayers();});
 
 		return () => {
 			map.remove();

@@ -4,6 +4,7 @@ import FeatureInfo from "./components/FeatureInfo/FeatureInfo";
 import LayerControl from "./components/LayerControl/LayerControl";
 import type * as maplibregl from "maplibre-gl";
 import Search from "./components/Search/Search";
+import BasemapControl from "./components/BasemapControl/BasemapControl";
 
 function App() {
         const [selectedFeature, setSelectedFeature] = useState<{
@@ -32,6 +33,7 @@ function App() {
                         } />)}
                         <LayerControl map={map} />
                         <Search onSearch={handleSearch} />
+                        <BasemapControl map={map} />
                 </div>
         )
 }
