@@ -55,6 +55,7 @@ function App() {
                                         onSelect={(feature) =>{
                                                 setSelectedFeature(feature);
                                                 setIdentifyResults([]);
+                                                setHoveredFeature(null);
                                         }}
                                         onHover={(feature) => {
                                                 setHoveredFeature(feature);

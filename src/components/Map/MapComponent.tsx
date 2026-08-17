@@ -76,7 +76,7 @@ function MapComponent({ onFeatureSelect, onMapReady,
 	const selectedFeatureId = useRef<string | number>(null);
 	const mapContainer = useRef<HTMLDivElement | null>(null);
 	const mapRef = useRef<maplibregl.Map | null>(null);
-	const hoveredFeatureId = useRef<string | number | undefined>();
+	const hoveredFeatureId = useRef<string | number | undefined>(undefined);
 
 	const [coordinates, setCoordinates] = useState<{
 		lng: number;lat:number
@@ -340,7 +340,12 @@ function MapComponent({ onFeatureSelect, onMapReady,
 					source: "utility-network",
 					filter: ["==", ["geometry-type"], "Point"],
 					paint: {
-						"circle-radius": 7,
+						"circle-radius": [
+							"case",
+							["boolean", ["feature-state", "hovered"], false],
+							10,
+							7,
+						],
 						"circle-color": [
 							"case", 
 							["boolean", ["feature-state", "hovered"], false], 
