@@ -17,6 +17,7 @@ type MapComponentProps = {
 	onClearSelection?: (clearFn: () => void) => void;
 	onZoomToFeature?: (zoomFn: () => void) => void;
 	onIdentifyResults?: (results: IdentifyResult[]) => void;
+	hoveredFeature?: IdentifyResult | null;
 };
 
 class HomeControl implements
@@ -66,12 +67,16 @@ maplibregl.IControl {
 	}
 }
 
-function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelection, onZoomToFeature, onIdentifyResults }: MapComponentProps) {
+function MapComponent({ onFeatureSelect, onMapReady, 
+	searchValue, onClearSelection, onZoomToFeature, 
+	onIdentifyResults,
+ }: MapComponentProps) {
 
 	const utilityNetworkGeoJSON = utilityNetwork as unknown as GeoJSON.FeatureCollection;
 	const selectedFeatureId = useRef<string | number>(null);
 	const mapContainer = useRef<HTMLDivElement | null>(null);
 	const mapRef = useRef<maplibregl.Map | null>(null);
+	// const hoveredFEatureId = useRef<string | number | undefined>(null);
 
 	const [coordinates, setCoordinates] = useState<{
 		lng: number;lat:number
@@ -184,6 +189,8 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 
 		onFeatureSelect?.(null);
 	}
+
+
 
 	useEffect(() => {
 		onClearSelection?.(() => {

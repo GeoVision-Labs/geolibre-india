@@ -5,9 +5,12 @@ type IdentifyResultsProps = {
         results: IdentifyResult[];
         onSelect: (feature: IdentifyResult) => void;
         onClose: () => void;
+        onHover?: (feature: IdentifyResult) => void;
+        onHoverEnd?: () => void;
 };
 
-function IdentifyResults({results, onSelect, onClose}: IdentifyResultsProps) {
+function IdentifyResults({results, onSelect, onClose, onHover, onHoverEnd}: IdentifyResultsProps) {
+        
         return (
                 <div className="identify-results">
                         <div className="identify-results-header">
@@ -23,7 +26,9 @@ function IdentifyResults({results, onSelect, onClose}: IdentifyResultsProps) {
                                         className="identify-results-id"
                                         type="button"
                                         key={`${feature.layerId}-${feature.id}`}
-                                        onClick={() => onSelect(feature)}>
+                                        onClick={() => onSelect(feature)}
+                                        onMouseEnter={() => onHover?.(feature)}
+                                        onMouseLeave={() => onHoverEnd?.()}>
                                                 <div className="identify-results-id">
                                                         {String(feature.id)}
                                                 </div>

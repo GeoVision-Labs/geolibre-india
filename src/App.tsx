@@ -16,7 +16,7 @@ function App() {
         const [clearMapSelection, setClearMapSelection] = useState<(() => void) | null>(null);
         const [zoomToFeature, setZoomToFeature] = useState<(() => void) | null>(null);
         const [identifyResults, setIdentifyResults] = useState<IdentifyResult[]>([]);
-
+        
         const handleSearch = (value: string) => {
                 console.log("Searching for: ", value);
                 setSearchValue(value);
@@ -37,7 +37,10 @@ function App() {
         return (
                 <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
                         <MapComponent 
-                                onFeatureSelect={setSelectedFeature} 
+                                onFeatureSelect={(feature) => {
+                                        setSelectedFeature(feature);
+                                        setIdentifyResults([]);
+                                }}
                                 onMapReady={setMap} 
                                 searchValue={searchValue} 
                                 onClearSelection={(clearFn) => setClearMapSelection(() => clearFn)}
