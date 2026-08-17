@@ -16,6 +16,7 @@ type MapComponentProps = {
 	searchValue?: string;
 	onClearSelection?: (clearFn: () => void) => void;
 	onZoomToFeature?: (zoomFn: () => void) => void;
+	onIdentifyResults?: (results: IdentifyResult[]) => void;
 };
 
 class HomeControl implements
@@ -65,7 +66,7 @@ maplibregl.IControl {
 	}
 }
 
-function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelection, onZoomToFeature }: MapComponentProps) {
+function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelection, onZoomToFeature, onIdentifyResults }: MapComponentProps) {
 
 	const utilityNetworkGeoJSON = utilityNetwork as unknown as GeoJSON.FeatureCollection;
 	const selectedFeatureId = useRef<string | number>(null);
@@ -303,43 +304,77 @@ function MapComponent({ onFeatureSelect, onMapReady, searchValue, onClearSelecti
 
 			onMapReady?.(map);
 
+			// map.on("click", (event) => {
+			// 	const pointFeatures = map.queryRenderedFeatures(event.point, {
+			// 		layers: ["utility-points"],
+			// 	});
+			// 	if (pointFeatures.length > 0) {
+			// 		const feature = pointFeatures[0];
+			// 		if (feature.id != null) {
+			// 			selectFeature(map, feature);
+			// 			return;
+			// 		}
+			// 	}
+
+			// 	const lineFeatures = map.queryRenderedFeatures(event.point, {
+			// 		layers: ["power-lines"],
+			// 	});
+			// 	if (lineFeatures.length > 0) {
+			// 		const feature = lineFeatures[0];
+			// 		if (feature.id != null) {
+			// 			selectFeature(map, feature);
+			// 			return;
+			// 		}
+			// 	}
+
+			// 	const polygonFeatures = map.queryRenderedFeatures(event.point, {
+			// 		layers: ["service-areas"],
+			// 	});
+			// 	if (polygonFeatures.length > 0) {
+			// 		const feature = polygonFeatures[0];
+			// 		if (feature.id != null) {
+			// 			selectFeature(map, feature);
+			// 			return;
+			// 		}
+			// 	}
+
+			// 	clearSelection(map);
+			// });
 			map.on("click", (event) => {
-				const pointFeatures = map.queryRenderedFeatures(event.point, {
-					layers: ["utility-points"],
+				const features = map.queryRenderedFeatures(event.point, {
+					layers: [
+					"utility-points",
+					"power-lines",
+					"service-areas",
+					],
 				});
-				if (pointFeatures.length > 0) {
-					const feature = pointFeatures[0];
-					if (feature.id != null) {
-						selectFeature(map, feature);
-						return;
-					}
+				
+				if (features.length === 0) {
+					clearSelection(map);
+					return;
 				}
-
-				const lineFeatures = map.queryRenderedFeatures(event.point, {
-					layers: ["power-lines"],
+				
+				const identifyResults: IdentifyResult[] = features
+					.filter((feature) => feature.id != null)
+					.map((feature) => ({
+					id: feature.id,
+					geometryType: feature.geometry?.type ?? "",
+					layerId: feature.layer?.id ?? "",
+					properties: feature.properties as Record<string, unknown>,
+					}));
+				
+				if (identifyResults.length === 0) {
+					clearSelection(map);
+					return;
+				}
+				
+				if (identifyResults.length === 1) {
+					selectFeature(map, features[0]);
+					return;
+				}
+				onIdentifyResults?.(identifyResults);
 				});
-				if (lineFeatures.length > 0) {
-					const feature = lineFeatures[0];
-					if (feature.id != null) {
-						selectFeature(map, feature);
-						return;
-					}
-				}
 
-				const polygonFeatures = map.queryRenderedFeatures(event.point, {
-					layers: ["service-areas"],
-				});
-				if (polygonFeatures.length > 0) {
-					const feature = polygonFeatures[0];
-					if (feature.id != null) {
-						selectFeature(map, feature);
-						return;
-					}
-				}
-
-				clearSelection(map);
-			});
-			
 		});
 
 		map.on("style.load", () => {addUtilityLayers();});

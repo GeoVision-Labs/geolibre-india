@@ -6,6 +6,7 @@ import type * as maplibregl from "maplibre-gl";
 import Search from "./components/Search/Search";
 import BasemapControl from "./components/BasemapControl/BasemapControl";
 import type { IdentifyResult } from "./types/IdentifyResult";
+import IdentifyResults from "./components/IdentifyResults/IdentifyResult";
 
 function App() {
         const [selectedFeature, setSelectedFeature] = useState<IdentifyResult | null>(null);
@@ -14,6 +15,7 @@ function App() {
         const [searchValue, setSearchValue] = useState("");
         const [clearMapSelection, setClearMapSelection] = useState<(() => void) | null>(null);
         const [zoomToFeature, setZoomToFeature] = useState<(() => void) | null>(null);
+        const [identifyResults, setIdentifyResults] = useState<IdentifyResult[]>([]);
 
         const handleSearch = (value: string) => {
                 console.log("Searching for: ", value);
@@ -35,12 +37,25 @@ function App() {
         return (
                 <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
                         <MapComponent 
-                        onFeatureSelect={setSelectedFeature} 
-                        onMapReady={setMap} 
-                        searchValue={searchValue} 
-                        onClearSelection={(clearFn) => setClearMapSelection(() => clearFn)}
-                        onZoomToFeature={(zoomFn) => setZoomToFeature(() => zoomFn)}
-                 />
+                                onFeatureSelect={setSelectedFeature} 
+                                onMapReady={setMap} 
+                                searchValue={searchValue} 
+                                onClearSelection={(clearFn) => setClearMapSelection(() => clearFn)}
+                                onZoomToFeature={(zoomFn) => setZoomToFeature(() => zoomFn)}
+                                onIdentifyResults={setIdentifyResults}
+                        />
+                        {identifyResults.length > 1 && (
+                                <IdentifyResults 
+                                        results={identifyResults}
+                                        onSelect={(feature) =>{
+                                                setSelectedFeature(feature);
+                                                setIdentifyResults([]);
+                                        }}
+                                        onClose={() => {
+                                                setIdentifyResults([]);
+                                        }}
+                                />
+                        )}
                         {selectedFeature && (
                                 <FeatureInfo feature={selectedFeature} onClose={
                                         () => {
