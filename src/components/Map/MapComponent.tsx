@@ -69,14 +69,14 @@ maplibregl.IControl {
 
 function MapComponent({ onFeatureSelect, onMapReady, 
 	searchValue, onClearSelection, onZoomToFeature, 
-	onIdentifyResults,
+	onIdentifyResults, hoveredFeature
  }: MapComponentProps) {
 
 	const utilityNetworkGeoJSON = utilityNetwork as unknown as GeoJSON.FeatureCollection;
 	const selectedFeatureId = useRef<string | number>(null);
 	const mapContainer = useRef<HTMLDivElement | null>(null);
 	const mapRef = useRef<maplibregl.Map | null>(null);
-	// const hoveredFEatureId = useRef<string | number | undefined>(null);
+	const hoveredFeatureId = useRef<string | number | undefined>();
 
 	const [coordinates, setCoordinates] = useState<{
 		lng: number;lat:number
@@ -190,7 +190,41 @@ function MapComponent({ onFeatureSelect, onMapReady,
 		onFeatureSelect?.(null);
 	}
 
+	useEffect(() => {
+		const map = mapRef.current;
 
+		if(!map) {
+			return;
+		}
+
+		if(hoveredFeatureId.current !== undefined) {
+			map.setFeatureState(
+				{
+					source: "utility-network",
+					id: hoveredFeatureId.current,
+				},
+				{
+					hovered: false,
+				}
+			);
+			hoveredFeatureId.current = undefined;
+		}
+
+		if (!hoveredFeature || hoveredFeature.id === undefined) {
+			return;
+		}
+
+		map.setFeatureState(
+			{
+				source: "utility-network",
+				id: hoveredFeature.id,
+			},
+			{
+				hovered: true,
+			}
+		);
+		hoveredFeatureId.current = hoveredFeature.id;
+	}, [hoveredFeature]);
 
 	useEffect(() => {
 		onClearSelection?.(() => {
@@ -248,12 +282,16 @@ function MapComponent({ onFeatureSelect, onMapReady,
 					paint: {
 						"line-color": [
 							"case",
+							["boolean", ["feature-state", "hovered"], false],
+							"#ffff00",
 							["boolean", ["feature-state", "selected"], false],
 							"#ffa000",
 							"#ff6600",
 						],
 						"line-width": [
 							"case",
+							["boolean", ["feature-state", "hovered"], false],
+							8,
 							["boolean", ["feature-state", "selected"], false],
 							7,
 							4,
@@ -270,18 +308,24 @@ function MapComponent({ onFeatureSelect, onMapReady,
 					paint: {
 						"fill-color": [
 							"case",
+							["boolean", ["feature-state", "hovered"], false],
+							"#ffff00",
 							["boolean", ["feature-state", "selected"], false],
 							"#ffa000",
 							"#3388ff",
 						],
 						"fill-opacity": [
 							"case",
+							["boolean", ["feature-state", "hovered"], false],
+							0.4,
 							["boolean", ["feature-state", "selected"], false],
 							0.45,
 							0.2,
 						],
 						"fill-outline-color": [
 							"case",
+							["boolean", ["feature-state", "hovered"], false],
+							"#ffff00",
 							["boolean", ["feature-state", "selected"], false],
 							"#ffa000",
 							"#3388ff",
@@ -298,7 +342,12 @@ function MapComponent({ onFeatureSelect, onMapReady,
 					paint: {
 						"circle-radius": 7,
 						"circle-color": [
-							"case", ["boolean", ["feature-state", "selected"], false], "#ffa000", "#00ff00"
+							"case", 
+							["boolean", ["feature-state", "hovered"], false], 
+							"#ffff00",
+							["boolean", ["feature-state", "selected"], false], 
+							"#ffa000", 
+							"#00ff00",
 						],
 						"circle-stroke-color": "#ffffff",
 						"circle-stroke-width": 2,

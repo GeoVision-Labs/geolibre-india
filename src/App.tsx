@@ -16,7 +16,8 @@ function App() {
         const [clearMapSelection, setClearMapSelection] = useState<(() => void) | null>(null);
         const [zoomToFeature, setZoomToFeature] = useState<(() => void) | null>(null);
         const [identifyResults, setIdentifyResults] = useState<IdentifyResult[]>([]);
-        
+        const [hoveredFeature, setHoveredFeature] = useState<IdentifyResult | null>(null);
+
         const handleSearch = (value: string) => {
                 console.log("Searching for: ", value);
                 setSearchValue(value);
@@ -46,6 +47,7 @@ function App() {
                                 onClearSelection={(clearFn) => setClearMapSelection(() => clearFn)}
                                 onZoomToFeature={(zoomFn) => setZoomToFeature(() => zoomFn)}
                                 onIdentifyResults={setIdentifyResults}
+                                hoveredFeature={hoveredFeature}
                         />
                         {identifyResults.length > 1 && (
                                 <IdentifyResults 
@@ -54,8 +56,15 @@ function App() {
                                                 setSelectedFeature(feature);
                                                 setIdentifyResults([]);
                                         }}
+                                        onHover={(feature) => {
+                                                setHoveredFeature(feature);
+                                        }}
+                                        onHoverEnd={() => {
+                                                setHoveredFeature(null);
+                                        }}
                                         onClose={() => {
                                                 setIdentifyResults([]);
+                                                setHoveredFeature(null);
                                         }}
                                 />
                         )}
