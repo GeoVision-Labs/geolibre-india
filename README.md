@@ -2,6 +2,8 @@
  
 > Open-source geospatial platform for building reusable GIS applications across India.
 
+>> Access current map foundation app here: https://geolibre-india.vercel.app/
+
 ## Overview
  
 GeoLibre India is a modern open-source geospatial application framework being developed with React, TypeScript, MapLibre GL JS, and GeoJSON.
