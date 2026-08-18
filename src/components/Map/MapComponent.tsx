@@ -365,42 +365,6 @@ function MapComponent({ onFeatureSelect, onMapReady,
 
 			onMapReady?.(map);
 
-			// map.on("click", (event) => {
-			// 	const pointFeatures = map.queryRenderedFeatures(event.point, {
-			// 		layers: ["utility-points"],
-			// 	});
-			// 	if (pointFeatures.length > 0) {
-			// 		const feature = pointFeatures[0];
-			// 		if (feature.id != null) {
-			// 			selectFeature(map, feature);
-			// 			return;
-			// 		}
-			// 	}
-
-			// 	const lineFeatures = map.queryRenderedFeatures(event.point, {
-			// 		layers: ["power-lines"],
-			// 	});
-			// 	if (lineFeatures.length > 0) {
-			// 		const feature = lineFeatures[0];
-			// 		if (feature.id != null) {
-			// 			selectFeature(map, feature);
-			// 			return;
-			// 		}
-			// 	}
-
-			// 	const polygonFeatures = map.queryRenderedFeatures(event.point, {
-			// 		layers: ["service-areas"],
-			// 	});
-			// 	if (polygonFeatures.length > 0) {
-			// 		const feature = polygonFeatures[0];
-			// 		if (feature.id != null) {
-			// 			selectFeature(map, feature);
-			// 			return;
-			// 		}
-			// 	}
-
-			// 	clearSelection(map);
-			// });
 			map.on("click", (event) => {
 				const features = map.queryRenderedFeatures(event.point, {
 					layers: [
