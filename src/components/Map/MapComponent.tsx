@@ -155,8 +155,8 @@ function MapComponent({ onFeatureSelect, onMapReady,
 
 			map.fitBounds(
 				[
-					[bounds[0], bounds[0]],
-					[bounds[0], bounds[0]]
+					[bounds[0], bounds[1]],
+					[bounds[2], bounds[3]]
 				],
 				{
 					padding: 100,
