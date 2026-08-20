@@ -18,6 +18,7 @@ type MapComponentProps = {
 	onZoomToFeature?: (zoomFn: () => void) => void;
 	onIdentifyResults?: (results: IdentifyResult[]) => void;
 	hoveredFeature?: IdentifyResult | null;
+	onSelectFeature?: (selcetFn: (feature: IdentifyResult) => void) => void;
 };
 
 class HomeControl implements
@@ -69,7 +70,7 @@ maplibregl.IControl {
 
 function MapComponent({ onFeatureSelect, onMapReady, 
 	searchValue, onClearSelection, onZoomToFeature, 
-	onIdentifyResults, hoveredFeature
+	onIdentifyResults, hoveredFeature, onSelectFeature
  }: MapComponentProps) {
 
 	const utilityNetworkGeoJSON = utilityNetwork as unknown as GeoJSON.FeatureCollection;
@@ -131,6 +132,21 @@ function MapComponent({ onFeatureSelect, onMapReady,
 		onFeatureSelect?.(identifyResult);
 	}
 	
+	useEffect(() => {
+		const map = mapRef.current;
+
+		if(!map) {return;}
+
+		onSelectFeature?.((feature: IdentifyResult) => {
+			const sourceFeature = utilityNetwork.features.find((item) => 
+			item.properties?.assetId === feature.id);
+
+			if(!sourceFeature) {return;}
+
+			selectFeature(map, sourceFeature);
+		})
+	}, [onSelectFeature]);
+
 	const zoomToSelectedFeature = () => {
 		const map = mapRef.current;
 
@@ -171,22 +187,18 @@ function MapComponent({ onFeatureSelect, onMapReady,
 	};
 
 	const clearSelection = (map: maplibregl.Map) => {
-		if (selectedFeatureId.current === null) {
-			return;
-		} else {
+		if (selectedFeatureId.current !== null) {
 			map.setFeatureState(
-			{
-				source: "utility-network",
-				id: selectedFeatureId.current,
-			},
-			{
-				selected: false
-			}
-		);
+				{
+					source: "utility-network",
+					id: selectedFeatureId.current,
+				},
+				{
+					selected: false,
+				}
+			);
 		}
-		
 		selectedFeatureId.current = null;
-
 		onFeatureSelect?.(null);
 	}
 
@@ -364,7 +376,14 @@ function MapComponent({ onFeatureSelect, onMapReady,
 		map.on("load", () => {
 
 			onMapReady?.(map);
+			onSelectFeature?.((feature: IdentifyResult) => {
+				const sourceFeature = utilityNetwork.features.find(
+					(item) => item.properties?.assetId === feature.id
+				);
+				if (!sourceFeature) {return;}
 
+				selectFeature(map, sourceFeature);
+			});
 			map.on("click", (event) => {
 				const features = map.queryRenderedFeatures(event.point, {
 					layers: [
@@ -450,7 +469,11 @@ function MapComponent({ onFeatureSelect, onMapReady,
 	
 	useEffect(() => {
 		onZoomToFeature?.(zoomToSelectedFeature);
+		
 	}, [onZoomToFeature]);
+
+	
+	
 
 	return (
 		<div style={{ position: "fixed", inset: 0, width: "100%", height: "100dvh", overflow: "hidden" }} >

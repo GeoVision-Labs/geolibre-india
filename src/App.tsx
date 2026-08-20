@@ -9,12 +9,13 @@ import type { IdentifyResult } from "./types/IdentifyResult";
 import IdentifyResults from "./components/IdentifyResults/IdentifyResult";
 
 function App() {
-        const [selectedFeature, setSelectedFeature] = useState<IdentifyResult | null>(null);
 
+        const [selectedFeature, setSelectedFeature] = useState<IdentifyResult | null>(null);
         const [map, setMap] = useState<maplibregl.Map | null>(null);
         const [searchValue, setSearchValue] = useState("");
         const [clearMapSelection, setClearMapSelection] = useState<(() => void) | null>(null);
         const [zoomToFeature, setZoomToFeature] = useState<(() => void) | null>(null);
+        const [ selectMapFeature, setSelectMapFeature ] = useState<((feature: IdentifyResult) => void) | null>(null);
         const [identifyResults, setIdentifyResults] = useState<IdentifyResult[]>([]);
         const [hoveredFeature, setHoveredFeature] = useState<IdentifyResult | null>(null);
 
@@ -41,6 +42,7 @@ function App() {
                                 onFeatureSelect={(feature) => {
                                         setSelectedFeature(feature);
                                         setIdentifyResults([]);
+                                        setHoveredFeature(null);
                                 }}
                                 onMapReady={setMap} 
                                 searchValue={searchValue} 
@@ -48,12 +50,15 @@ function App() {
                                 onZoomToFeature={(zoomFn) => setZoomToFeature(() => zoomFn)}
                                 onIdentifyResults={setIdentifyResults}
                                 hoveredFeature={hoveredFeature}
+                                onSelectFeature={(selectFn) => 
+                                        setSelectMapFeature(() => selectFn)
+                                }
                         />
                         {identifyResults.length > 1 && (
                                 <IdentifyResults 
                                         results={identifyResults}
                                         onSelect={(feature) =>{
-                                                setSelectedFeature(feature);
+                                                selectMapFeature?.(feature);
                                                 setIdentifyResults([]);
                                                 setHoveredFeature(null);
                                         }}
