@@ -132,6 +132,41 @@ function MapComponent({ onFeatureSelect, onMapReady,
 		onFeatureSelect?.(identifyResult);
 	}
 
+	const zoomToFeature = (
+		map: maplibregl.Map,
+		feature: any
+	) => {
+		if(!feature) {
+			return;
+		}
+		
+		const geometry = feature.geometry;
+
+		if(geometry.type === "Point") {
+			const coordinates = geometry.coordinates as [number, number];
+			map.flyTo({
+				center: coordinates,
+				zoom: 16,
+				duration: 1000,
+			});
+			return;
+		} else {
+			const bounds = bbox(feature as any) as [number, number, number, number];
+
+			map.fitBounds(
+				[
+					[bounds[0], bounds[0]],
+					[bounds[0], bounds[0]]
+				],
+				{
+					padding: 100,
+					duration: 1000,
+					maxZoom: 17,
+				}
+			);
+		}
+	}
+
 	const zoomToSelectedFeature = () => {
 		const map = mapRef.current;
 
@@ -140,35 +175,7 @@ function MapComponent({ onFeatureSelect, onMapReady,
 			(item) => item.properties?.assetId === selectedFeatureId.current
 		);
 		if (!feature) {return;}
-
-		const geometry = feature.geometry;
-		if (geometry.type === "Point") {
-			const coordinates = geometry.coordinates as [number, number];
-			map.flyTo({
-				center: coordinates,
-				zoom: 16,
-				duration: 800,
-			});
-			return;
-		}
-
-		const bounds = bbox(feature as any) as [
-			number,
-			number,
-			number,
-			number,
-		];
-		map.fitBounds(
-			[
-				[bounds[0], bounds[1]],
-				[bounds[2], bounds[3]],
-			],
-			{
-				padding: 100,
-				duration: 800,
-				maxZoom:17,
-			}
-		);
+		zoomToFeature(map, feature);
 	};
 
 	const clearSelection = (map: maplibregl.Map) => {
@@ -401,6 +408,7 @@ function MapComponent({ onFeatureSelect, onMapReady,
 					selectFeature(map, features[0]);
 					return;
 				}
+				clearSelection(map);
 				onIdentifyResults?.(identifyResults);
 				});
 
@@ -413,6 +421,7 @@ function MapComponent({ onFeatureSelect, onMapReady,
 		}
 	}, []);
 
+	//Search UseEffect
 	useEffect(() => {
 		if (!searchValue?.trim()) return;
 
@@ -433,28 +442,13 @@ function MapComponent({ onFeatureSelect, onMapReady,
 		if (!feature) {
 			return
 		}
-
-		const geometry = feature.geometry;
-
-		if(geometry.type !== "Point") {
-			return;
-		}
-
-		const coordinates = geometry.coordinates as [number, number];
-
-		map.flyTo({
-			center: coordinates,
-			zoom: 16,
-			duration: 1000,
-		});
-
 		selectFeature(map, feature);
+		zoomToSelectedFeature();
 
 	}, [searchValue, onFeatureSelect]);
 	
 	useEffect(() => {
 		onZoomToFeature?.(zoomToSelectedFeature);
-		
 	}, [onZoomToFeature]);
 
 	
