@@ -105,18 +105,30 @@ export default class MesurementTool
                                         source: "measurement-line",
                                         paint: {
                                                 "line-color": "#ff0000",
-                                                "line-width": 3,
+                                                "line-width": 4,
                                         },
                                 });
                         }
                 }
 
                 private handleStyleLoad = () => {
-                        this.addMeasurementLayer();
+                        if (!this.map) return;
 
-                        if (this.measuring && this.points.length >= 1) {
-                                this.updateMeasurementLine();
-                        }
+                        this.map.once("idle", () => {
+                                if (!this.map) return;
+
+                                this.addMeasurementLayer();
+                                const measurementLayer = this.map.getLayer("measurement-line");
+
+                                if (measurementLayer) {
+                                        this.map.moveLayer("measurement-line");
+                                }
+
+                                if (this.measuring && this.points.length >= 1) {
+                                        this.updateMeasurementLine();
+                                        this.udpateSegmentLabels();
+                                }
+                                })
                 }
 
                 private calculateTotalDistance(): number {
@@ -216,7 +228,7 @@ export default class MesurementTool
                         const source = this.map.getSource(
                                 "measurement-line"
                         ) as maplibregl.GeoJSONSource | undefined;
-                        
+
                         if (source) { 
                                 source.setData({
                                         type: "Feature",
