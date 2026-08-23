@@ -11,6 +11,7 @@ export default class MesurementTool
                 private measuring = false;
                 private points: [number, number][] = [];
                 private markers: maplibregl.Marker[] = [];
+                private segmentLabels: maplibregl.Marker[] = [];
 
                 private handleMapClick = (event: maplibregl.MapMouseEvent) => {
                         if (!this.measuring) return;
@@ -22,6 +23,7 @@ export default class MesurementTool
                         this.points.push(point);
 
                         this.updateMeasurementLine();
+                        this.udpateSegmentLabels();
 
                         const totalDistance = this.calculateTotalDistance();
                         if(this.distanceElement) {
@@ -102,9 +104,18 @@ export default class MesurementTool
                                         type: "line",
                                         source: "measurement-line",
                                         paint: {
+                                                "line-color": "#ff0000",
                                                 "line-width": 3,
                                         },
                                 });
+                        }
+                }
+
+                private handleStyleLoad = () => {
+                        this.addMeasurementLayer();
+
+                        if (this.measuring && this.points.length >= 1) {
+                                this.updateMeasurementLine();
                         }
                 }
 
@@ -126,35 +137,108 @@ export default class MesurementTool
                         return total;
                 }
 
+                private udpateSegmentLabels() {
+                        if(!this.map || this.points.length < 2){
+                                return;
+                        }
+
+                        this.segmentLabels.forEach((label) => {
+                                label.remove();
+                        });
+
+                        this.segmentLabels = [];
+
+                        for (let i = 1; i < this.points.length; i++) {
+                                const start = this.points[i -1];
+                                const end = this.points[i];
+
+                                const segmentDistance = distance(
+                                        start,
+                                        end,
+                                        {units: "kilometers"}
+                                );
+
+                                const midLng = start[0] + (end[0] - start[0]) / 2;
+                                const midLat = start[1] + (end[1] - start[1]) / 2
+                                const midPoint: [number, number] = [
+                                        midLng,
+                                        midLat,
+                                ];
+
+                                if (
+                                        !Number.isFinite(midPoint[0]) ||
+                                        !Number.isFinite(midPoint[1]) ||
+                                        midPoint[0] < -180 ||
+                                        midPoint[0] > 180 ||
+                                        midPoint[1] < -90 ||
+                                        midPoint[1] > 90
+                                ) {
+                                        console.warn("Invalid measurement midpoint", {
+                                                start,
+                                                end,
+                                                midPoint,
+                                        });
+                                        continue;
+                                }
+
+                                const element = document.createElement("div");
+
+                                element.textContent = `${segmentDistance.toFixed(3)} km`;
+
+                                element.style.background = "white";
+                                element.style.padding = "3px 6px";
+                                element.style.borderRadius = "3px";
+                                element.style.fontSize = "11px";
+                                element.style.whiteSpace = "nowrap";
+                                element.style.pointerEvents = "none";
+
+                                const label = new maplibregl.Marker({
+                                        element,
+                                        anchor: "bottom",
+                                }).setLngLat(midPoint).addTo(this.map);
+
+                                this.segmentLabels.push(label);
+                        }
+                }
+
                 private clearMeasurement() {
                         this.points = [];
-
-                        if (!this.map) return;
-
-                        const source = this.map.getSource(
-                                "measurement-line"
-                        ) as maplibregl.GeoJSONSource | undefined;
-
-                        if(!source) return;
-
-                        source.setData({
-                                type: "Feature",
-                                geometry: {
-                                        type: "LineString",
-                                        coordinates: [],
-                                },
-                                properties: {},
-                        });
+                        this.cursorPoint = undefined;
 
                         this.markers.forEach((marker) => {
                                 marker.remove();
                         });
 
                         this.markers = [];
+                        
+                        if (!this.map) return;
+                        
+                        const source = this.map.getSource(
+                                "measurement-line"
+                        ) as maplibregl.GeoJSONSource | undefined;
+                        
+                        if (source) { 
+                                source.setData({
+                                        type: "Feature",
+                                        geometry: {
+                                                type: "LineString",
+                                                coordinates: [],
+                                        },
+                                        properties: {},
+                                });
+                        }
+
+                        this.segmentLabels.forEach((label) => {
+                                label.remove();
+                        })
+
+                        this.segmentLabels = [];
                 }
 
                 onAdd( map: maplibregl.Map) {
                         this.map = map;
+
+                        map.on("style.load", this.handleStyleLoad);
 
                         if (map.isStyleLoaded()) {
                                 this.addMeasurementLayer();
@@ -220,6 +304,7 @@ export default class MesurementTool
 
                 onRemove() {
                         if (this.map) {
+                                this.map.off("style.load", this.handleStyleLoad);
                                 this.map.off("click", this.handleMapClick);
                         
                                 // remove measurement-line layer
