@@ -1,9 +1,10 @@
 import * as maplibregl from 'maplibre-gl';
 import { distance } from "@turf/distance";
 
+                
 export default class MesurementTool
         implements maplibregl.IControl {
-
+                
                 private container?: HTMLDivElement;
                 private distanceElement?: HTMLDivElement;
                 private map?: maplibregl.Map;
@@ -264,13 +265,18 @@ export default class MesurementTool
                                 });
                         }
                 
-                        // Main control container
+                        // -----------------------------
+                        // Main container
+                        // -----------------------------
+                
                         const container = document.createElement("div");
                         container.className = "maplibregl-ctrl";
-                
                         container.style.position = "relative";
                 
-                        // Main measurement button
+                        // -----------------------------
+                        // Measurement icon button
+                        // -----------------------------
+                
                         const button = document.createElement("button");
                 
                         button.type = "button";
@@ -284,7 +290,6 @@ export default class MesurementTool
                         button.style.justifyContent = "center";
                         button.style.cursor = "pointer";
                 
-                        // Simple ruler SVG icon
                         button.innerHTML = `
                                 <svg
                                         width="18"
@@ -304,7 +309,10 @@ export default class MesurementTool
                                 </svg>
                         `;
                 
-                        // Measurement menu
+                        // -----------------------------
+                        // Measurement panel
+                        // -----------------------------
+                
                         const menu = document.createElement("div");
                 
                         menu.style.display = "none";
@@ -315,10 +323,13 @@ export default class MesurementTool
                         menu.style.borderRadius = "6px";
                         menu.style.boxShadow = "0 2px 8px rgba(0,0,0,0.2)";
                         menu.style.padding = "6px";
-                        menu.style.minWidth = "150px";
+                        menu.style.minWidth = "170px";
                         menu.style.zIndex = "1000";
                 
-                        // Menu title
+                        // -----------------------------
+                        // Title
+                        // -----------------------------
+                
                         const title = document.createElement("div");
                 
                         title.textContent = "Measurement";
@@ -328,7 +339,10 @@ export default class MesurementTool
                         title.style.padding = "6px 8px";
                         title.style.color = "#555";
                 
-                        // Distance button
+                        // -----------------------------
+                        // Distance
+                        // -----------------------------
+                
                         const distanceButton = document.createElement("button");
                 
                         distanceButton.type = "button";
@@ -343,15 +357,10 @@ export default class MesurementTool
                         distanceButton.style.cursor = "pointer";
                         distanceButton.style.borderRadius = "4px";
                 
-                        distanceButton.onmouseenter = () => {
-                                distanceButton.style.background = "#f2f2f2";
-                        };
+                        // -----------------------------
+                        // Area - future
+                        // -----------------------------
                 
-                        distanceButton.onmouseleave = () => {
-                                distanceButton.style.background = "transparent";
-                        };
-                
-                        // Future area button
                         const areaButton = document.createElement("button");
                 
                         areaButton.type = "button";
@@ -367,77 +376,77 @@ export default class MesurementTool
                         areaButton.style.textAlign = "left";
                         areaButton.style.color = "#999";
                         areaButton.style.cursor = "not-allowed";
-
-                        // Clear button
-                        const clearButton = document.createElement("button");
-                        clearButton.textContent = "Clear";
-                        clearButton.type = "button";
-
-                        //Close button
-                        const closeButton = document.createElement("button");
-                        closeButton.textContent = "Close";
-                        closeButton.type = "button";
-
-                        menu.appendChild(clearButton);
-                        menu.appendChild(closeButton);
-
-                        clearButton.onclick = () => {
-                                this.clearMeasurement();
-
-                                this.points = [];
-                                this.cursorPoint = undefined;
-
-                                menu.style.display = "none";
-
-                                distanceElement.style.display = "block";
-
-                                if(this.measuring) {
-                                        this.map?.getCanvas().style.setProperty(
-                                                "cursor",
-                                                "crosshair"
-                                        );
-                                }
-                        };
-
-                        closeButton.onclick = () => {
-                                this.measuring = false;
-
-                                this.clearMeasurement();
-
-                                this.points = [];
-                                this.cursorPoint = undefined;
-
-                                this.map?.off("click", 
-                                        this.handleMapClick
-                                );
-
-                                this.map?.off("mousemove",
-                                        this.handleMouseMove
-                                );
-
-                                this.map?.getCanvas().style.setProperty("cursor", "");
-
-                                menu.style.display = "nonw";
-
-                                distanceElement.style.display = "block";
-                        }
                 
-                        // Distance display
+                        // -----------------------------
+                        // Clear
+                        // -----------------------------
+                
+                        const clearButton = document.createElement("button");
+                
+                        clearButton.type = "button";
+                        clearButton.textContent = "🧹  Clear";
+                
+                        clearButton.style.display = "block";
+                        clearButton.style.width = "100%";
+                        clearButton.style.padding = "8px";
+                        clearButton.style.border = "none";
+                        clearButton.style.background = "transparent";
+                        clearButton.style.textAlign = "left";
+                        clearButton.style.cursor = "pointer";
+                        clearButton.style.borderRadius = "4px";
+                
+                        // -----------------------------
+                        // Close
+                        // -----------------------------
+                
+                        const closeButton = document.createElement("button");
+                
+                        closeButton.type = "button";
+                        closeButton.textContent = "✕  Close";
+                
+                        closeButton.style.display = "block";
+                        closeButton.style.width = "100%";
+                        closeButton.style.padding = "8px";
+                        closeButton.style.border = "none";
+                        closeButton.style.background = "transparent";
+                        closeButton.style.textAlign = "left";
+                        closeButton.style.cursor = "pointer";
+                        closeButton.style.borderRadius = "4px";
+                
+                        // -----------------------------
+                        // Distance result
+                        // -----------------------------
+                
                         const distanceElement = document.createElement("div");
                 
                         distanceElement.style.display = "none";
-                        distanceElement.style.background = "white";
-                        distanceElement.style.padding = "6px 10px";
+                        distanceElement.style.background = "#f5f5f5";
+                        distanceElement.style.padding = "7px 8px";
                         distanceElement.style.marginTop = "5px";
                         distanceElement.style.borderRadius = "4px";
-                        distanceElement.style.fontSize = "13px";
+                        distanceElement.style.fontSize = "12px";
+                        distanceElement.style.fontWeight = "500";
                         distanceElement.style.whiteSpace = "nowrap";
                 
                         distanceElement.textContent = "Distance: 0.000 km";
                 
                         this.distanceElement = distanceElement;
                 
-                        // Open / close measurement menu
+                        // -----------------------------
+                        // Build menu
+                        // -----------------------------
+                
+                        menu.appendChild(title);
+                        menu.appendChild(distanceButton);
+                        menu.appendChild(areaButton);
+                        menu.appendChild(clearButton);
+                        menu.appendChild(closeButton);
+                        menu.appendChild(distanceElement);
+                
+                        // -----------------------------
+                        // Main icon → open/close panel
+                        // -----------------------------
+                
                         button.onclick = () => {
                                 menu.style.display =
                                         menu.style.display === "none"
@@ -445,40 +454,346 @@ export default class MesurementTool
                                                 : "none";
                         };
                 
-                        // Start distance measurement
+                        // -----------------------------
+                        // Distance
+                        // -----------------------------
+                
                         distanceButton.onclick = () => {
                                 this.measuring = true;
+                
                                 this.points = [];
                                 this.cursorPoint = undefined;
-
+                
                                 this.clearMeasurement();
                 
-                                menu.style.display = "none";
-                
+                                menu.style.display = "block";
                                 distanceElement.style.display = "block";
+                
+                                distanceElement.textContent = "Distance: 0.000 km";
                 
                                 this.map?.getCanvas().style.setProperty(
                                         "cursor",
                                         "crosshair",
                                 );
                 
+                                this.map?.off("click", this.handleMapClick);
+                                this.map?.off("mousemove", this.handleMouseMove);
+                
                                 this.map?.on("click", this.handleMapClick);
                                 this.map?.on("mousemove", this.handleMouseMove);
                         };
                 
-                        // Build menu
-                        menu.appendChild(title);
-                        menu.appendChild(distanceButton);
-                        menu.appendChild(areaButton);
+                        // -----------------------------
+                        // Clear
+                        // -----------------------------
+                
+                        clearButton.onclick = () => {
+                                this.clearMeasurement();
+                
+                                this.measuring = false;
+                
+                                this.points = [];
+                                this.cursorPoint = undefined;
+                
+                                this.map?.off("click", this.handleMapClick);
+                                this.map?.off("mousemove", this.handleMouseMove);
+                
+                                this.map?.getCanvas().style.setProperty(
+                                        "cursor",
+                                        "",
+                                );
+                
+                                // Return to measurement selection
+                                distanceElement.style.display = "none";
+                        };
+                
+                        // -----------------------------
+                        // Close
+                        // -----------------------------
+                
+                        closeButton.onclick = () => {
+                                this.clearMeasurement();
+                
+                                this.measuring = false;
+                
+                                this.points = [];
+                                this.cursorPoint = undefined;
+                
+                                this.map?.off("click", this.handleMapClick);
+                                this.map?.off("mousemove", this.handleMouseMove);
+                
+                                this.map?.getCanvas().style.setProperty(
+                                        "cursor",
+                                        "",
+                                );
+                
+                                // Return completely to initial state
+                                menu.style.display = "none";
+                                distanceElement.style.display = "none";
+                        };
+                
+                        // -----------------------------
+                        // Hover effects
+                        // -----------------------------
+                
+                        const buttons = [
+                                distanceButton,
+                                clearButton,
+                                closeButton,
+                        ];
+                
+                        buttons.forEach((menuButton) => {
+                                menuButton.onmouseenter = () => {
+                                        menuButton.style.background = "#f2f2f2";
+                                };
+                
+                                menuButton.onmouseleave = () => {
+                                        menuButton.style.background = "transparent";
+                                };
+                        });
+                
+                        // -----------------------------
+                        // Add to map
+                        // -----------------------------
                 
                         container.appendChild(button);
                         container.appendChild(menu);
-                        container.appendChild(distanceElement);
                 
                         this.container = container;
                 
                         return container;
                 }
+
+
+                // onAdd(map: maplibregl.Map) {
+                //         this.map = map;
+                
+                //         map.on("style.load", this.handleStyleLoad);
+                
+                //         if (map.isStyleLoaded()) {
+                //                 this.addMeasurementLayer();
+                //         } else {
+                //                 map.once("load", () => {
+                //                         this.addMeasurementLayer();
+                //                 });
+                //         }
+                
+                //         // Main control container
+                //         const container = document.createElement("div");
+                //         container.className = "maplibregl-ctrl";
+                
+                //         container.style.position = "relative";
+                
+                //         // Main measurement button
+                //         const button = document.createElement("button");
+                
+                //         button.type = "button";
+                //         button.title = "Measurement";
+                //         button.setAttribute("aria-label", "Measurement");
+                
+                //         button.style.width = "30px";
+                //         button.style.height = "30px";
+                //         button.style.display = "flex";
+                //         button.style.alignItems = "center";
+                //         button.style.justifyContent = "center";
+                //         button.style.cursor = "pointer";
+                
+                //         // Simple ruler SVG icon
+                //         button.innerHTML = `
+                //                 <svg
+                //                         width="18"
+                //                         height="18"
+                //                         viewBox="0 0 24 24"
+                //                         fill="none"
+                //                         stroke="currentColor"
+                //                         stroke-width="2"
+                //                         stroke-linecap="round"
+                //                         stroke-linejoin="round"
+                //                 >
+                //                         <path d="M3 21L21 3" />
+                //                         <path d="M7 17l2 2" />
+                //                         <path d="M10 14l2 2" />
+                //                         <path d="M13 11l2 2" />
+                //                         <path d="M16 8l2 2" />
+                //                 </svg>
+                //         `;
+                
+                //         // Measurement menu
+                //         const menu = document.createElement("div");
+                
+                //         menu.style.display = "none";
+                //         menu.style.position = "absolute";
+                //         menu.style.right = "0";
+                //         menu.style.top = "36px";
+                //         menu.style.background = "white";
+                //         menu.style.borderRadius = "6px";
+                //         menu.style.boxShadow = "0 2px 8px rgba(0,0,0,0.2)";
+                //         menu.style.padding = "6px";
+                //         menu.style.minWidth = "150px";
+                //         menu.style.zIndex = "1000";
+                
+                //         // Menu title
+                //         const title = document.createElement("div");
+                
+                //         title.textContent = "Measurement";
+                
+                //         title.style.fontSize = "12px";
+                //         title.style.fontWeight = "600";
+                //         title.style.padding = "6px 8px";
+                //         title.style.color = "#555";
+                
+                //         // Distance button
+                //         const distanceButton = document.createElement("button");
+                
+                //         distanceButton.type = "button";
+                //         distanceButton.textContent = "📏  Distance";
+                
+                //         distanceButton.style.display = "block";
+                //         distanceButton.style.width = "100%";
+                //         distanceButton.style.padding = "8px";
+                //         distanceButton.style.border = "none";
+                //         distanceButton.style.background = "transparent";
+                //         distanceButton.style.textAlign = "left";
+                //         distanceButton.style.cursor = "pointer";
+                //         distanceButton.style.borderRadius = "4px";
+                
+                //         distanceButton.onmouseenter = () => {
+                //                 distanceButton.style.background = "#f2f2f2";
+                //         };
+                
+                //         distanceButton.onmouseleave = () => {
+                //                 distanceButton.style.background = "transparent";
+                //         };
+                
+                //         // Future area button
+                //         const areaButton = document.createElement("button");
+                
+                //         areaButton.type = "button";
+                //         areaButton.textContent = "⬡  Area";
+                
+                //         areaButton.disabled = true;
+                
+                //         areaButton.style.display = "block";
+                //         areaButton.style.width = "100%";
+                //         areaButton.style.padding = "8px";
+                //         areaButton.style.border = "none";
+                //         areaButton.style.background = "transparent";
+                //         areaButton.style.textAlign = "left";
+                //         areaButton.style.color = "#999";
+                //         areaButton.style.cursor = "not-allowed";
+
+                //         // Clear button
+                //         const clearButton = document.createElement("button");
+                //         clearButton.textContent = "Clear";
+                //         clearButton.type = "button";
+
+                //         //Close button
+                //         const closeButton = document.createElement("button");
+                //         closeButton.textContent = "Close";
+                //         closeButton.type = "button";
+
+                //         menu.appendChild(clearButton);
+                //         menu.appendChild(closeButton);
+
+                //         clearButton.onclick = () => {
+                //                 this.clearMeasurement();
+
+                //                 this.points = [];
+                //                 this.cursorPoint = undefined;
+
+                //                 menu.style.display = "none";
+
+                //                 distanceElement.style.display = "block";
+
+                //                 if(this.measuring) {
+                //                         this.map?.getCanvas().style.setProperty(
+                //                                 "cursor",
+                //                                 "crosshair"
+                //                         );
+                //                 }
+                //         };
+
+                //         closeButton.onclick = () => {
+
+                //                 this.measuring = false;
+
+                //                 this.clearMeasurement();
+
+                //                 this.map?.off("click", 
+                //                         this.handleMapClick
+                //                 );
+
+                //                 this.map?.off("mousemove",
+                //                         this.handleMouseMove
+                //                 );
+
+                //                 this.map?.getCanvas().style.setProperty("cursor", "");
+
+                //                 menu.style.display = "none";
+
+                //                 distanceElement.style.display = "block";
+                                
+                //                 this.points = [];
+                //                 this.cursorPoint = undefined;
+                //         }
+                
+                //         // Distance display
+                //         const distanceElement = document.createElement("div");
+                
+                //         distanceElement.style.display = "none";
+                //         distanceElement.style.background = "white";
+                //         distanceElement.style.padding = "6px 10px";
+                //         distanceElement.style.marginTop = "5px";
+                //         distanceElement.style.borderRadius = "4px";
+                //         distanceElement.style.fontSize = "13px";
+                //         distanceElement.style.whiteSpace = "nowrap";
+                
+                //         distanceElement.textContent = "Distance: 0.000 km";
+                
+                //         this.distanceElement = distanceElement;
+                
+                //         // Open / close measurement menu
+                //         button.onclick = () => {
+                //                 menu.style.display =
+                //                         menu.style.display === "none"
+                //                                 ? "block"
+                //                                 : "none";
+                //         };
+                
+                //         // Start distance measurement
+                //         distanceButton.onclick = () => {
+                //                 this.measuring = true;
+                //                 this.points = [];
+                //                 this.cursorPoint = undefined;
+
+                //                 this.clearMeasurement();
+                
+                //                 menu.style.display = "none";
+                
+                //                 distanceElement.style.display = "block";
+                
+                //                 this.map?.getCanvas().style.setProperty(
+                //                         "cursor",
+                //                         "crosshair",
+                //                 );
+                
+                //                 this.map?.on("click", this.handleMapClick);
+                //                 this.map?.on("mousemove", this.handleMouseMove);
+                //         };
+                
+                //         // Build menu
+                //         menu.appendChild(title);
+                //         menu.appendChild(distanceButton);
+                //         menu.appendChild(areaButton);
+                
+                //         container.appendChild(button);
+                //         container.appendChild(menu);
+                //         container.appendChild(distanceElement);
+                
+                //         this.container = container;
+                
+                //         return container;
+                // }
 
 
                 // onAdd( map: maplibregl.Map) {
