@@ -7,6 +7,7 @@ import { bbox } from "@turf/bbox";
 import home from "/home.png";
 import LocateControl from "./LocateControl";
 import type { IdentifyResult } from "../../types/IdentifyResult";
+import MeasurementTool from '../MeasurementControl/MesurementTool';
 
 maplibregl.setWorkerUrl(workerUrl);
 
@@ -239,6 +240,7 @@ function MapComponent({ onFeatureSelect, onMapReady,
 		});
 	}, [onClearSelection]);
 
+	//Map initialization useEffect
 	useEffect(() => {
 
 		if (!mapContainer.current) return;
@@ -268,6 +270,7 @@ function MapComponent({ onFeatureSelect, onMapReady,
 		}));
 		map.addControl(new HomeControl(), "top-right");
 		map.addControl(new LocateControl, "top-right");
+		map.addControl(new MeasurementTool(), "top-right");
 
 		const addUtilityLayers = () => {
 			if(!map.getSource("utility-network")) {
