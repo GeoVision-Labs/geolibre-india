@@ -13,7 +13,7 @@ export const utilityLayers: LayerDefinition[] = [
         name: "Power Lines",
         sourceId: "utility-network",
         geometryType: "LineString",
-        visible:true,
+        visible: true,
     },
     {
         id: "service-areas",
