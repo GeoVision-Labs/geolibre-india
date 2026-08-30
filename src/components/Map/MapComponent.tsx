@@ -2,7 +2,8 @@ import { useEffect, useState, useRef } from "react";
 import * as maplibregl from 'maplibre-gl';
 import "maplibre-gl/dist/maplibre-gl.css";
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
-import utilityNetwork from '../../data/utility-network.json';
+// import utilityNetwork from '../../data/utility-network.json';
+import { GeoJSONDataSource } from "../../services/dataSources/GeoJSONDataSource";
 import { bbox } from "@turf/bbox";
 import home from "/home.png";
 import LocateControl from "./LocateControl";
@@ -22,6 +23,12 @@ type MapComponentProps = {
 	hoveredFeature?: IdentifyResult | null;
 	onSelectFeature?: (selectFn: (feature: IdentifyResult) => void) => void;
 };
+
+const utilityNetworkDataSource = new GeoJSONDataSource(
+			"utility-network",
+		);
+
+const utilityNetwork = utilityNetworkDataSource.getData();
 
 class HomeControl implements
 	maplibregl.IControl {
@@ -75,7 +82,7 @@ function MapComponent({ onFeatureSelect, onMapReady,
 	onIdentifyResults, hoveredFeature, onSelectFeature
 }: MapComponentProps) {
 
-	const utilityNetworkGeoJSON = utilityNetwork as unknown as GeoJSON.FeatureCollection;
+	// const utilityNetworkGeoJSON = utilityNetwork as unknown as GeoJSON.FeatureCollection;
 	const selectedFeatureId = useRef<string | number>(null);
 	const mapContainer = useRef<HTMLDivElement | null>(null);
 	const mapRef = useRef<maplibregl.Map | null>(null);
@@ -173,7 +180,7 @@ function MapComponent({ onFeatureSelect, onMapReady,
 		const map = mapRef.current;
 
 		if (!map || selectedFeatureId.current === null) { return; }
-		const feature = utilityNetwork.features.find(
+		const feature = utilityNetworkDataSource.getData().features.find(
 			(item) => item.properties?.assetId === selectedFeatureId.current
 		);
 		if (!feature) { return; }
@@ -344,7 +351,7 @@ function MapComponent({ onFeatureSelect, onMapReady,
 			if (!map.getSource("utility-network")) {
 				map.addSource("utility-network", {
 					type: "geojson",
-					data: utilityNetworkGeoJSON,
+					data: utilityNetworkDataSource.getData(),
 					promoteId: "assetId",
 				});
 			}
@@ -479,7 +486,7 @@ function MapComponent({ onFeatureSelect, onMapReady,
 
 		const search = searchValue.trim().toLowerCase();
 
-		const feature = utilityNetwork.features.find((f) => {
+		const feature = utilityNetworkDataSource.getData().features.find((f) => {
 			const assetId = f.properties?.assetId;
 
 			return (

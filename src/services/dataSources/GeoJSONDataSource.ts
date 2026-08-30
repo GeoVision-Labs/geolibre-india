@@ -1,12 +1,13 @@
 import type { FeatureCollection, Geometry, GeoJsonProperties } from "geojson";
 import type { DataSource, DataSourceCapabilities } from "../../types/DataSource";
+import utilityNetwork from '../../data/utility-network.json';
 
 export class GeoJSONDataSource {
     private readonly definition: DataSource;
 
     constructor(
         id: string,
-        data: FeatureCollection<Geometry, GeoJsonProperties>,
+        // data: FeatureCollection<Geometry, GeoJsonProperties>,
     ) {
         const capabilities: DataSourceCapabilities = {
             load: true,
@@ -22,7 +23,7 @@ export class GeoJSONDataSource {
             type: "geojson",
             capabilities,
             config: {
-                data,
+                data: utilityNetwork,
             },
         };
     }
