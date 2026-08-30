@@ -1,3 +1,5 @@
+import type { LayerStyle } from "./LayerStyle";
+
 export type LayerGeometryType = 
     | "Point"
     | "LineString"
@@ -13,4 +15,5 @@ export type LayerDefinition = {
     sourceId: string;
     geometryType: LayerGeometryType;
     visible: boolean;
+    style: LayerStyle;
 }

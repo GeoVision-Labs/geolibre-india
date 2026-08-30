@@ -8,6 +8,7 @@ import home from "/home.png";
 import LocateControl from "./LocateControl";
 import type { IdentifyResult } from "../../types/IdentifyResult";
 import MeasurementTool from '../MeasurementControl/MesurementTool';
+// import { utilityLayers } from "../../config/layers";
 
 maplibregl.setWorkerUrl(workerUrl);
 
