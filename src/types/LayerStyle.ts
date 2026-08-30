@@ -5,6 +5,6 @@ import type {
 } from 'maplibre-gl';
 
 export type LayerStyle =
-    | Pick<CircleLayerSpecification, "type" | "paint" | "layout" >
-    | Pick<LineLayerSpecification, "type" | "paint" | "layout" >
-    | Pick<FillLayerSpecification, "type" | "paint" | "layout" >;
+    | Pick<CircleLayerSpecification, "type" | "paint" | "layout">
+    | Pick<LineLayerSpecification, "type" | "paint" | "layout">
+    | Pick<FillLayerSpecification, "type" | "paint" | "layout">;

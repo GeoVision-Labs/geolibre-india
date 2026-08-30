@@ -8,7 +8,7 @@ import home from "/home.png";
 import LocateControl from "./LocateControl";
 import type { IdentifyResult } from "../../types/IdentifyResult";
 import MeasurementTool from '../MeasurementControl/MesurementTool';
-// import { utilityLayers } from "../../config/layers";
+import { utilityLayers } from "../../config/layers";
 
 maplibregl.setWorkerUrl(workerUrl);
 
@@ -24,8 +24,8 @@ type MapComponentProps = {
 };
 
 class HomeControl implements
-maplibregl.IControl {
-	private map?: maplibregl.Map; 
+	maplibregl.IControl {
+	private map?: maplibregl.Map;
 	onAdd(map: maplibregl.Map) {
 		this.map = map;
 		const container = document.createElement("div");
@@ -43,7 +43,7 @@ maplibregl.IControl {
 		button.appendChild(icon);
 
 		button.onclick = () => {
-			if(!this.map) return;
+			if (!this.map) return;
 			const bounds = bbox(utilityNetwork as any) as [
 				number,
 				number,
@@ -70,10 +70,10 @@ maplibregl.IControl {
 	}
 }
 
-function MapComponent({ onFeatureSelect, onMapReady, 
-	searchValue, onClearSelection, onZoomToFeature, 
+function MapComponent({ onFeatureSelect, onMapReady,
+	searchValue, onClearSelection, onZoomToFeature,
 	onIdentifyResults, hoveredFeature, onSelectFeature
- }: MapComponentProps) {
+}: MapComponentProps) {
 
 	const utilityNetworkGeoJSON = utilityNetwork as unknown as GeoJSON.FeatureCollection;
 	const selectedFeatureId = useRef<string | number>(null);
@@ -82,7 +82,7 @@ function MapComponent({ onFeatureSelect, onMapReady,
 	const hoveredFeatureId = useRef<string | number | undefined>(undefined);
 
 	const [coordinates, setCoordinates] = useState<{
-		lng: number;lat:number
+		lng: number; lat: number
 	} | null>(null);
 
 	const selectFeature = (map: maplibregl.Map, feature: any) => {
@@ -93,9 +93,9 @@ function MapComponent({ onFeatureSelect, onMapReady,
 				source: "utility-network",
 				id: selectedFeatureId.current,
 			},
-			{
-				selected: false
-			});
+				{
+					selected: false
+				});
 		}
 		const previousSelectedId = selectedFeatureId.current;
 		if (previousSelectedId !== null) {
@@ -120,7 +120,7 @@ function MapComponent({ onFeatureSelect, onMapReady,
 				{
 					selected: true,
 				}
-			);	
+			);
 		}
 
 		const properties = feature.properties as Record<string, unknown>;
@@ -138,13 +138,13 @@ function MapComponent({ onFeatureSelect, onMapReady,
 		map: maplibregl.Map,
 		feature: any
 	) => {
-		if(!feature) {
+		if (!feature) {
 			return;
 		}
-		
+
 		const geometry = feature.geometry;
 
-		if(geometry.type === "Point") {
+		if (geometry.type === "Point") {
 			const coordinates = geometry.coordinates as [number, number];
 			map.flyTo({
 				center: coordinates,
@@ -172,11 +172,11 @@ function MapComponent({ onFeatureSelect, onMapReady,
 	const zoomToSelectedFeature = () => {
 		const map = mapRef.current;
 
-		if (!map || selectedFeatureId.current === null) {return;}
+		if (!map || selectedFeatureId.current === null) { return; }
 		const feature = utilityNetwork.features.find(
 			(item) => item.properties?.assetId === selectedFeatureId.current
 		);
-		if (!feature) {return;}
+		if (!feature) { return; }
 		zoomToFeature(map, feature);
 	};
 
@@ -199,11 +199,11 @@ function MapComponent({ onFeatureSelect, onMapReady,
 	useEffect(() => {
 		const map = mapRef.current;
 
-		if(!map) {
+		if (!map) {
 			return;
 		}
 
-		if(hoveredFeatureId.current !== undefined) {
+		if (hoveredFeatureId.current !== undefined) {
 			map.setFeatureState(
 				{
 					source: "utility-network",
@@ -255,7 +255,7 @@ function MapComponent({ onFeatureSelect, onMapReady,
 
 		mapRef.current = map;
 		map.on("error", (e) => { console.error("Map error:", e); });
-		
+
 		map.on("mousemove", (event) => {
 			setCoordinates({
 				lng: event.lngLat.lng,
@@ -273,101 +273,145 @@ function MapComponent({ onFeatureSelect, onMapReady,
 		map.addControl(new LocateControl, "top-right");
 		map.addControl(new MeasurementTool(), "top-right");
 
+		// const addUtilityLayers = () => {
+		// 	const pointLayer = utilityLayers.find(
+		// 		(layer) => layer.id === "utility-points",
+		// 	);
+		// 	const lineLayer = utilityLayers.find(
+		// 		(layer) => layer.id === "power-lines",
+		// 	);
+		// 	const polygonLayer = utilityLayers.find(
+		// 		(layer) => layer.id === "service-areas",
+		// 	);
+
+		// 	if (!pointLayer || !lineLayer || !polygonLayer) {
+		// 		throw new Error("Utility layer configuration is incomplete")
+		// 	}
+
+		// 	if(!map.getSource("utility-network")) {
+		// 		map.addSource("utility-network", {
+		// 			type: "geojson",
+		// 			data: utilityNetworkGeoJSON,
+		// 			promoteId: "assetId",
+		// 		});
+		// 	}
+		// 	if (!map.getLayer("power-lines")) {
+		// 		if (!lineLayer.style?.type !== "line") {
+		// 			throw new Error("Power line layer must use line style");
+		// 		}
+		// 		map.addLayer({
+		// 			id: lineLayer.id,
+		// 			type: "line",
+		// 			source: lineLayer.sourceId,
+		// 			filter: ["==", ["geometry-type"], "LineString"],
+		// 			paint: lineLayer.style.paint,
+		// 			layout: {
+		// 				...lineLayer.style.layout,
+		// 				visibility: lineLayer.visible ? "visible" : "none",
+		// 			},
+		// 		});
+		// 	}
+		// 	if (!map.getLayer("service-areas")) {
+		// 		map.addLayer({
+		// 			id: polygonLayer.id,
+		// 			type: "fill",
+		// 			source: polygonLayer.sourceId,
+		// 			filter: ["==", ["geometry-type"], "Polygon"],
+		// 			paint: polygonLayer.style.paint,
+		// 			layout: {
+		// 				...polygonLayer.style.layout,
+		// 				visibility: polygonLayer.visible ? "visible" : "none",
+		// 			},
+		// 		});
+		// 	}
+		// 	if (!map.getLayer("utility-points")) {
+		// 		map.addLayer({
+		// 			id: pointLayer.id,
+		// 			type: "circle",
+		// 			source: pointLayer.sourceId,
+		// 			filter: ["==", ["geometry-type"], "Point"],
+		// 			paint: pointLayer.style.paint,
+		// 			layout: {
+		// 				...pointLayer.style.layout,
+		// 				visibility: pointLayer.visible ? "visible" : "none",
+		// 			},
+		// 		});
+		// 	}
+		// };
+
 		const addUtilityLayers = () => {
-			if(!map.getSource("utility-network")) {
+
+			if (!map.getSource("utility-network")) {
 				map.addSource("utility-network", {
 					type: "geojson",
 					data: utilityNetworkGeoJSON,
 					promoteId: "assetId",
 				});
 			}
-			if (!map.getLayer("power-lines")) {
-				map.addLayer({
-					id: "power-lines",
-					type: "line",
-					source: "utility-network",
-					filter: ["==", ["geometry-type"], "LineString"],
-					paint: {
-						"line-color": [
-							"case",
-							["boolean", ["feature-state", "hovered"], false],
-							"#ffff00",
-							["boolean", ["feature-state", "selected"], false],
-							"#ffa000",
-							"#ff6600",
-						],
-						"line-width": [
-							"case",
-							["boolean", ["feature-state", "hovered"], false],
-							8,
-							["boolean", ["feature-state", "selected"], false],
-							7,
-							4,
-						],
-					},
-				});
-			}
-			if (!map.getLayer("service-areas")) {
-				map.addLayer({
-					id: "service-areas",
-					type: "fill",
-					source: "utility-network",
-					filter: ["==", ["geometry-type"], "Polygon"],
-					paint: {
-						"fill-color": [
-							"case",
-							["boolean", ["feature-state", "hovered"], false],
-							"#ffff00",
-							["boolean", ["feature-state", "selected"], false],
-							"#ffa000",
-							"#3388ff",
-						],
-						"fill-opacity": [
-							"case",
-							["boolean", ["feature-state", "hovered"], false],
-							0.4,
-							["boolean", ["feature-state", "selected"], false],
-							0.45,
-							0.2,
-						],
-						"fill-outline-color": [
-							"case",
-							["boolean", ["feature-state", "hovered"], false],
-							"#ffff00",
-							["boolean", ["feature-state", "selected"], false],
-							"#ffa000",
-							"#3388ff",
-						],
-					},
-				});
-			}
-			if (!map.getLayer("utility-points")) {
-				map.addLayer({
-					id: "utility-points",
-					type: "circle",
-					source: "utility-network",
-					filter: ["==", ["geometry-type"], "Point"],
-					paint: {
-						"circle-radius": [
-							"case",
-							["boolean", ["feature-state", "hovered"], false],
-							10,
-							7,
-						],
-						"circle-color": [
-							"case", 
-							["boolean", ["feature-state", "hovered"], false], 
-							"#ffff00",
-							["boolean", ["feature-state", "selected"], false], 
-							"#ffa000", 
-							"#00ff00",
-						],
-						"circle-stroke-color": "#ffffff",
-						"circle-stroke-width": 2,
-					},
-				});
-			}
+
+			const addConfiguredLayer = (
+				layer: (typeof utilityLayers)[number]
+			) => {
+
+				if (map.getLayer(layer.id)) {
+					return;
+				}
+
+				switch (layer.style.type) {
+
+					case "circle":
+						map.addLayer({
+							id: layer.id,
+							type: "circle",
+							source: layer.sourceId,
+							filter: ["==", ["geometry-type"], "Point"],
+							paint: layer.style.paint,
+							layout: {
+								...layer.style.layout,
+								visibility: layer.visible
+									? "visible"
+									: "none",
+							},
+						});
+						break;
+
+					case "line":
+						map.addLayer({
+							id: layer.id,
+							type: "line",
+							source: layer.sourceId,
+							filter: ["==", ["geometry-type"], "LineString"],
+							paint: layer.style.paint,
+							layout: {
+								...layer.style.layout,
+								visibility: layer.visible
+									? "visible"
+									: "none",
+							},
+						});
+						break;
+
+					case "fill":
+						map.addLayer({
+							id: layer.id,
+							type: "fill",
+							source: layer.sourceId,
+							filter: ["==", ["geometry-type"], "Polygon"],
+							paint: layer.style.paint,
+							layout: {
+								...layer.style.layout,
+								visibility: layer.visible
+									? "visible"
+									: "none",
+							},
+						});
+						break;
+				}
+			};
+
+			utilityLayers.forEach(addConfiguredLayer);
 		};
+
 
 		map.on("load", () => {
 
@@ -376,49 +420,49 @@ function MapComponent({ onFeatureSelect, onMapReady,
 				const sourceFeature = utilityNetwork.features.find(
 					(item) => item.properties?.assetId === feature.id
 				);
-				if (!sourceFeature) {return;}
+				if (!sourceFeature) { return; }
 
 				selectFeature(map, sourceFeature);
 			});
 			map.on("click", (event) => {
 				const features = map.queryRenderedFeatures(event.point, {
 					layers: [
-					"utility-points",
-					"power-lines",
-					"service-areas",
+						"utility-points",
+						"power-lines",
+						"service-areas",
 					],
 				});
-				
+
 				if (features.length === 0) {
 					clearSelection(map);
 					return;
 				}
-				
+
 				const identifyResults: IdentifyResult[] = features
 					.filter((feature) => feature.id != null)
 					.map((feature) => ({
-					id: feature.id,
-					geometryType: feature.geometry?.type ?? "",
-					layerId: feature.layer?.id ?? "",
-					properties: feature.properties as Record<string, unknown>,
+						id: feature.id,
+						geometryType: feature.geometry?.type ?? "",
+						layerId: feature.layer?.id ?? "",
+						properties: feature.properties as Record<string, unknown>,
 					}));
-				
+
 				if (identifyResults.length === 0) {
 					clearSelection(map);
 					return;
 				}
-				
+
 				if (identifyResults.length === 1) {
 					selectFeature(map, features[0]);
 					return;
 				}
 				clearSelection(map);
 				onIdentifyResults?.(identifyResults);
-				});
+			});
 
 		});
 
-		map.on("style.load", () => {addUtilityLayers();});
+		map.on("style.load", () => { addUtilityLayers(); });
 
 		return () => {
 			map.remove();
@@ -450,17 +494,17 @@ function MapComponent({ onFeatureSelect, onMapReady,
 		zoomToSelectedFeature();
 
 	}, [searchValue, onFeatureSelect]);
-	
+
 	useEffect(() => {
 		onZoomToFeature?.(zoomToSelectedFeature);
 	}, [onZoomToFeature]);
 
-	
-	
+
+
 
 	return (
 		<div style={{ position: "fixed", inset: 0, width: "100%", height: "100dvh", overflow: "hidden" }} >
-			<div ref={mapContainer} style={{width: "100%", height: "100%"}} />
+			<div ref={mapContainer} style={{ width: "100%", height: "100%" }} />
 			{coordinates && (
 				<div
 					style={{
@@ -473,9 +517,9 @@ function MapComponent({ onFeatureSelect, onMapReady,
 						fontSize: "12px",
 						zIndex: 10,
 					}}>
-						Lat: {coordinates.lat.toFixed(5)}
-						{" | "}
-						Lon: {coordinates.lng.toFixed(5)}
+					Lat: {coordinates.lat.toFixed(5)}
+					{" | "}
+					Lon: {coordinates.lng.toFixed(5)}
 				</div>
 			)}
 		</div>
