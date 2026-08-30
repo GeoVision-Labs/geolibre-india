@@ -14,7 +14,7 @@ export class GeoJSONDataSource {
             identify: true,
             search: true,
             spatialFilter: true,
-            edit: true,
+            edit: false,
         };
 
         this.definition = {
