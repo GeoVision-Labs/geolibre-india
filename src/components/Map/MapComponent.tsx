@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import * as maplibregl from 'maplibre-gl';
 import "maplibre-gl/dist/maplibre-gl.css";
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
-// import utilityNetwork from '../../data/utility-network.json';
+import utilityNetwork from '../../data/utility-network.json';
 import { GeoJSONDataSource } from "../../services/dataSources/GeoJSONDataSource";
 import { bbox } from "@turf/bbox";
 import home from "/home.png";
@@ -26,9 +26,8 @@ type MapComponentProps = {
 
 const utilityNetworkDataSource = new GeoJSONDataSource(
 			"utility-network",
+			utilityNetwork as GeoJSON.FeatureCollection,
 		);
-
-const utilityNetwork = utilityNetworkDataSource.getData();
 
 class HomeControl implements
 	maplibregl.IControl {
